@@ -55,6 +55,7 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
+    io-console (0.4.3)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -144,6 +145,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
+  io-console
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.5)
@@ -156,4 +158,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
