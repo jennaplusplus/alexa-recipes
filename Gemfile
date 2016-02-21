@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'io-console'
+gem 'io-console' # may not have needed this
+
+# for SSL
+gem 'passenger'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
