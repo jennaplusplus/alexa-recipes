@@ -12,8 +12,8 @@ class WelcomeController < ApplicationController
           "type": "PlainText",
           "text": "Welcome to recipes!"
         },
-        "card": null,
-        "reprompt": null,
+        "card": nil,
+        "reprompt": nil,
         "shouldEndSession": true
       },
       "sessionAttributes": {}
