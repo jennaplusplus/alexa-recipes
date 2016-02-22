@@ -6,6 +6,9 @@ gem 'passenger'
 # secrets
 gem 'dotenv-rails', :groups => [:development, :test]
 
+# mongo
+gem 'mongoid', '~> 5.1', '>= 5.1.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use SCSS for stylesheets
