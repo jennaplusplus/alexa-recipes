@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
       "response": {
         "outputSpeech": {
           "type": "PlainText",
-          "text": "Welcome to recipes!"
+          "text": "Hello world!"
         },
         "card": nil,
         "reprompt": nil,
