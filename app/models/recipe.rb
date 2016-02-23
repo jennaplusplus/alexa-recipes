@@ -11,7 +11,11 @@ class Recipe
   end
 
   def self.launch
-    Recipe.build_response({text: "Welcome to Recipes! Would you like a list of ingredients?", shouldEndSession: false})
+    Recipe.build_response({
+      text:               "Welcome to Recipes! Would you like a list of ingredients?",
+      shouldEndSession:   false,
+      sessionAttributes:  {"question": "list of ingredients"}
+    })
   end
 
   def self.intents(params)
