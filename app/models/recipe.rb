@@ -39,6 +39,7 @@ class Recipe
     recipe["ingredients"].each do |ingredient|
       list += "#{ingredient["amount"]} #{ingredient["unit"]} of #{ingredient["name"]}, "
     end
+    list += "."
     Recipe.build_response({
       text: list,
       shouldEndSession: true
