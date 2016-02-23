@@ -33,7 +33,7 @@ class Recipe
     elsif params["request"]["intent"]["name"] == "IngredientAmount"
       Recipe.ingredient_amount(params)
     elsif params["request"]["intent"]["name"] == "IngredientNeeded"
-      Recipe.ingredient_needed(params)
+      Recipe.ingredient_amount(params)
     end
   end
 
@@ -41,10 +41,10 @@ class Recipe
     recipe = Recipe.first
     list = "Here are the ingredients for #{recipe["name"]}. "
     recipe["ingredients"].each do |ingredient|
-      if ingredient["amount"]["unit"].nil?
-        list += "#{ingredient["amount"]["measurement"]} #{ingredient["name"]}, "
+      if ingredient["unit"].nil?
+        list += "#{ingredient["measurement"]} #{ingredient["name"]}, "
       else
-        list += "#{ingredient["amount"]["measurement"]} #{ingredient["amount"]["unit"]} of #{ingredient["name"]}, "
+        list += "#{ingredient["measurement"]} #{ingredient["unit"]} of #{ingredient["name"]}, "
       end
     end
     list += "."
@@ -57,40 +57,17 @@ class Recipe
   def self.ingredient_amount(params)
     query = params["request"]["intent"]["slots"]["Ingredient"]["value"]
     recipe = Recipe.first # this will change to look up the current user's active recipe
-    ingredients = recipe["ingredients"].map { |i| i["name"] }
-    if ingredients.include?(query)
-      if query["unit"].nil?
+    ingredient_names = recipe["ingredients"].map { |i| i["name"] }
+    if ingredient_names.include?(query)
+      ing = recipe["ingredients"].detect { |ingredient| ingredient["name"] == query }
+      if ing["unit"].nil?
         Recipe.build_response({
-          text: "You need #{query["amount"]} #{query["name"]}. ",
+          text: "You need #{ing["measurement"]} #{ing["name"]}. ",
           shouldEndSession: true
         })
       else
         Recipe.build_response({
-          text: "You need #{query["amount"]} #{query["unit"]} of #{query["name"]}. ",
-          shouldEndSession: true
-        })
-      end
-    else
-      Recipe.build_response({
-        text: "I couldn't find #{query} in this recipe.",
-        shouldEndSession: true
-      })
-    end
-  end
-
-  def self.ingredient_needed(params)
-    query = params["request"]["intent"]["slots"]["Ingredient"]["value"]
-    recipe = Recipe.first # this will change to look up the current user's active recipe
-    ingredients = recipe["ingredients"].map { |i| i["name"] }
-    if ingredients.include?(query)
-      if query["unit"].nil?
-        Recipe.build_response({
-          text: "You need #{query["amount"]} #{query["name"]}. ",
-          shouldEndSession: true
-        })
-      else
-        Recipe.build_response({
-          text: "You need #{query["amount"]} #{query["unit"]} of #{query["name"]}. ",
+          text: "You need #{ing["measurement"]} #{ing["unit"]} of #{ing["name"]}. ",
           shouldEndSession: true
         })
       end
