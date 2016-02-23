@@ -59,10 +59,17 @@ class Recipe
     recipe = Recipe.first # this will change to look up the current user's active recipe
     ingredients = recipe["ingredients"].map { |i| i["name"] }
     if ingredients.include?(query)
-      Recipe.build_response({
-        text: "Yes, you do need #{query}.",
-        shouldEndSession: true
-      })
+      if query["unit"].nil?
+        Recipe.build_response({
+          text: "You need #{query["amount"]} #{query["name"]}. ",
+          shouldEndSession: true
+        })
+      else
+        Recipe.build_response({
+          text: "You need #{query["amount"]} #{query["unit"]} of #{query["name"]}. ",
+          shouldEndSession: true
+        })
+      end
     else
       Recipe.build_response({
         text: "I couldn't find #{query} in this recipe.",
@@ -76,10 +83,17 @@ class Recipe
     recipe = Recipe.first # this will change to look up the current user's active recipe
     ingredients = recipe["ingredients"].map { |i| i["name"] }
     if ingredients.include?(query)
-      Recipe.build_response({
-        text: "Yes, you do need #{query}.",
-        shouldEndSession: true
-      })
+      if query["unit"].nil?
+        Recipe.build_response({
+          text: "You need #{query["amount"]} #{query["name"]}. ",
+          shouldEndSession: true
+        })
+      else
+        Recipe.build_response({
+          text: "You need #{query["amount"]} #{query["unit"]} of #{query["name"]}. ",
+          shouldEndSession: true
+        })
+      end
     else
       Recipe.build_response({
         text: "I couldn't find #{query} in this recipe.",
