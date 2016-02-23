@@ -61,7 +61,8 @@ class Recipe
   def self.ingredient_needed(params)
     query = params["request"]["intent"]["slots"]["Ingredient"]["value"]
     recipe = Recipe.first
-    if recipe["ingredients"].include?(query)
+    ingredients = recipe["ingredients"].map { |i| i["name"] }
+    if ingredients.include?(query)
       Recipe.build_response({
         text: "Yes, you do need #{query}.",
         shouldEndSession: true
