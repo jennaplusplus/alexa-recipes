@@ -7,7 +7,6 @@ class WelcomeController < ApplicationController
 
   def ask
     response = Recipe.begin(params)
-    raise
     render :json => response.as_json, status: :ok
   end
 end
