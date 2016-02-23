@@ -2,8 +2,8 @@ class Recipe
   include Mongoid::Document
   field :name, type: String
 
-  def self.begin(request_params)
-    if request_params["type"] == "LaunchRequest"
+  def self.begin(params)
+    if params["type"] == "LaunchRequest"
       response = {
         "version": "0.1.1",
         "response": {
