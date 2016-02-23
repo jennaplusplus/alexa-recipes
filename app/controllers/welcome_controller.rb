@@ -6,19 +6,7 @@ class WelcomeController < ApplicationController
   end
 
   def ask
-    response = {
-      "version": "0.1.1",
-      "response": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": "Hello world!"
-        },
-        "card": nil,
-        "reprompt": nil,
-        "shouldEndSession": true
-      },
-      "sessionAttributes": {}
-    }
+    response = Recipe.launch
 
     render :json => response.as_json, status: :ok
   end
