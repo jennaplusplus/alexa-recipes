@@ -41,7 +41,11 @@ class Recipe
     recipe = Recipe.first
     list = "Here are the ingredients for #{recipe["name"]}. "
     recipe["ingredients"].each do |ingredient|
-      list += "#{ingredient["amount"]} #{ingredient["unit"]} of #{ingredient["name"]}, "
+      if ingredient["unit"].nil?
+        list += "#{ingredient["amount"]} #{ingredient["name"]}, "
+      else
+        list += "#{ingredient["amount"]} #{ingredient["unit"]} of #{ingredient["name"]}, "
+      end
     end
     list += "."
     Recipe.build_response({
@@ -60,7 +64,7 @@ class Recipe
 
   def self.ingredient_needed(params)
     query = params["request"]["intent"]["slots"]["Ingredient"]["value"]
-    recipe = Recipe.first
+    recipe = Recipe.first # this will change to look up the current user's active recipe
     ingredients = recipe["ingredients"].map { |i| i["name"] }
     if ingredients.include?(query)
       Recipe.build_response({
