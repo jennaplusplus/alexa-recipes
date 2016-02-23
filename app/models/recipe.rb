@@ -41,10 +41,10 @@ class Recipe
     recipe = Recipe.first
     list = "Here are the ingredients for #{recipe["name"]}. "
     recipe["ingredients"].each do |ingredient|
-      if ingredient["unit"].nil?
-        list += "#{ingredient["amount"]} #{ingredient["name"]}, "
+      if ingredient["amount"]["unit"].nil?
+        list += "#{ingredient["amount"]["measurement"]} #{ingredient["name"]}, "
       else
-        list += "#{ingredient["amount"]} #{ingredient["unit"]} of #{ingredient["name"]}, "
+        list += "#{ingredient["amount"]["measurement"]} #{ingredient["amount"]["unit"]} of #{ingredient["name"]}, "
       end
     end
     list += "."
