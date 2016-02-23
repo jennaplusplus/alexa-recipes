@@ -12,9 +12,9 @@ class Recipe
 
   def self.launch
     Recipe.build_response({
-      text:               "Welcome to Recipes! Would you like a list of ingredients?",
-      shouldEndSession:   false,
-      sessionAttributes:  {"question": "list of ingredients"}
+      text: "Welcome to Recipes! Would you like a list of ingredients?",
+      shouldEndSession: false,
+      sessionAttributes: {"question": "list of ingredients"}
     })
   end
 
@@ -24,7 +24,10 @@ class Recipe
         Recipe.ingredient_list
       end
     elsif params["request"]["intent"]["name"] == "AMAZON.NoIntent"
-      Recipe.build_response({text: "Ok.", shouldEndSession: true})
+      Recipe.build_response({
+        text: "Ok.",
+        shouldEndSession: true
+      })
     elsif params["request"]["intent"]["name"] == "IngredientList"
       Recipe.ingredient_list
     end
@@ -36,7 +39,10 @@ class Recipe
     recipe["ingredients"].each do |ingredient|
       list += "#{ingredient["name"]}, "
     end
-    Recipe.build_response({text: list, shouldEndSession: true})
+    Recipe.build_response({
+      text: list,
+      shouldEndSession: true
+    })
   end
 
   def self.build_response(info_hash)
