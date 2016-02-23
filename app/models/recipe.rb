@@ -32,6 +32,8 @@ class Recipe
       Recipe.ingredient_list
     elsif params["request"]["intent"]["name"] == "IngredientAmount"
       Recipe.ingredient_amount(params)
+    elsif params["request"]["intent"]["name"] == "IngredientNeeded"
+      Recipe.ingredient_needed(params)
     end
   end
 
@@ -50,11 +52,26 @@ class Recipe
 
   def self.ingredient_amount(params)
     query = params["request"]["intent"]["slots"]["Ingredient"]["value"]
-
     Recipe.build_response({
       text: "you need #{query}.",
       shouldEndSession: true
     })
+  end
+
+  def self.ingredient_needed(params)
+    query = params["request"]["intent"]["slots"]["Ingredient"]["value"]
+    recipe = Recipe.first
+    if recipe["ingredients"].include?(query)
+      Recipe.build_response({
+        text: "Yes, you do need #{query}.",
+        shouldEndSession: true
+      })
+    else
+      Recipe.build_response({
+        text: "I couldn't find #{query} in this recipe.",
+        shouldEndSession: true
+      })
+    end
   end
 
   def self.build_response(info_hash)
