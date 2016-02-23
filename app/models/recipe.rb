@@ -49,8 +49,10 @@ class Recipe
   end
 
   def self.ingredient_amount(params)
+    query = params["request"]["intent"]["slots"]["Ingredient"]["value"]
+
     Recipe.build_response({
-      text: "you need...",
+      text: "you need #{query}.",
       shouldEndSession: true
     })
   end
