@@ -28,9 +28,9 @@ class Recipe
 
   def self.ingredient_list
     recipe = Recipe.first
-    list = "Here are the ingredients for #{recipe["name"]}"
+    list = "Here are the ingredients for #{recipe["name"]}."
     recipe["ingredients"].each do |ingredient|
-      list += ingredient["name"]
+      list += "#{ingredient["name"]}, "
     end
     Recipe.build_response({text: list, shouldEndSession: true})
   end
