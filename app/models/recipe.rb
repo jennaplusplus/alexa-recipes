@@ -3,13 +3,13 @@ class Recipe
   field :name, type: String
 
   def self.begin(params)
-    if params["type"] == "LaunchRequest"
+    if params["request"]["type"] == "LaunchRequest"
       response = {
         "version": "0.1.1",
         "response": {
           "outputSpeech": {
             "type": "PlainText",
-            "text": "Welcome to Recipes! Would you like a list of ingredients for this recipe?"
+            "text": "Welcome to Recipes!"
           },
           "card": nil,
           "reprompt": nil,
@@ -17,10 +17,22 @@ class Recipe
         },
         "sessionAttributes": {}
       }
-      return response
+    elsif params["request"]["type"] == "IntentRequest"
+      response = {
+        "version": "0.1.1",
+        "response": {
+          "outputSpeech": {
+            "type": "PlainText",
+            "text": "Here are your ingredients."
+          },
+          "card": nil,
+          "reprompt": nil,
+          "shouldEndSession": true
+        },
+        "sessionAttributes": {}
+      }
     end
-
-
+    return response
   end
 
 
