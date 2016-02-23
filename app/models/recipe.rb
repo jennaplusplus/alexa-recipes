@@ -30,6 +30,8 @@ class Recipe
       })
     elsif params["request"]["intent"]["name"] == "IngredientList"
       Recipe.ingredient_list
+    elsif params["request"]["intent"]["name"] == "IngredientAmount"
+      Recipe.ingredient_amount(params)
     end
   end
 
@@ -42,6 +44,13 @@ class Recipe
     list += "."
     Recipe.build_response({
       text: list,
+      shouldEndSession: true
+    })
+  end
+
+  def self.ingredient_amount(params)
+    Recipe.build_response({
+      text: "you need...",
       shouldEndSession: true
     })
   end
