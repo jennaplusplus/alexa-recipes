@@ -37,7 +37,7 @@ class Recipe
     recipe = Recipe.first
     list = "Here are the ingredients for #{recipe["name"]}. "
     recipe["ingredients"].each do |ingredient|
-      list += "#{ingredient["name"]}, "
+      list += "#{ingredient["amount"]} #{ingredient["unit"]} of #{ingredient["name"]}, "
     end
     Recipe.build_response({
       text: list,
