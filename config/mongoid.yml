@@ -144,7 +144,7 @@ test:
 production:
   clients:
     default:
-      database: alexa_recipes_test
+      database: alexa_recipes_production
       hosts:
         - localhost:27017
       options:
