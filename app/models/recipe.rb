@@ -37,13 +37,19 @@ class Recipe
       return response
     elsif params["request"]["type"] == "IntentRequest"
       if params["request"]["intent"]["name"] == "AMAZON.YesIntent"
-        return Recipe.build_response("Yes!")
+        if params["session"]["attributes"]["question"] == "list of ingredients"
+          Recipe.ingredient_list
+        end
       elsif params["request"]["intent"]["name"] == "AMAZON.NoIntent"
         return Recipe.build_response("No.")
       elsif params["request"]["intent"]["name"] == "IngredientList"
-        return Recipe.build_response("Here are your ingredients.")
+        Recipe.ingredient_list
       end
     end
+  end
+
+  def self.ingredient_list
+    return Recipe.build_response("Here are your ingredients.")
   end
 
 
