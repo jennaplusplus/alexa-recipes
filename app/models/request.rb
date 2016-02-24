@@ -65,20 +65,27 @@ class Request
     query = @slots["Ingredient"]["value"]
     recipe = Recipe.first # this will change to look up the current user's active recipe
     ingredient_names = recipe["ingredients"].map { |i| i["name"] }
-    if ingredient_names.include?(query)
-      ing = recipe["ingredients"].detect { |ingredient| ingredient["name"] == query }
+    query_variants = [query, query.pluralize, query.singularize]
+    matches = []
+    query_variants.each do |q|
+      matches.push(q) if ingredient_names.include?(q)
+    end
+    text = ""
+    matches.each do |match|
+      ing = recipe["ingredients"].detect { |ingredient| ingredient["name"] == match }
       if ing["unit"].nil?
         Response.new({
-          text: "You need #{ing["measurement"]} #{ing["name"]}. ",
+          text: text + "You need #{ing["measurement"]} #{ing["name"]}. ",
           shouldEndSession: true
         })
       else
         Response.new({
-          text: "You need #{ing["measurement"]} #{ing["unit"]} of #{ing["name"]}. ",
+          text: text + "You need #{ing["measurement"]} #{ing["unit"]} of #{ing["name"]}. ",
           shouldEndSession: true
         })
       end
-    else
+    end
+    if matches.length == 0
       Response.new({
         text: "I couldn't find #{query} in this recipe.",
         shouldEndSession: true
