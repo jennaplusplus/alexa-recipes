@@ -61,7 +61,7 @@ class Request
     })
   end
 
-  def self.ingredient_amount
+  def ingredient_amount
     query = @slots["Ingredient"]["value"]
     recipe = Recipe.first # this will change to look up the current user's active recipe
     ingredient_names = recipe["ingredients"].map { |i| i["name"] }
