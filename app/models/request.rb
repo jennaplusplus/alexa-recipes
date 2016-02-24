@@ -76,7 +76,7 @@ class Request
       end
       list += "."
       Response.new({
-        text: "I couldn't find #{query} in this recipe." + list,
+        text: "I couldn't find #{query} in this recipe. " + list,
         shouldEndSession: true
       })
     else
