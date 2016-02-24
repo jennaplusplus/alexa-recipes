@@ -40,7 +40,7 @@ class Request
     elsif @intent == "IngredientList"
       self.ingredient_list
     elsif @intent == "IngredientAmount" || @intent == "IngredientNeeded"
-      Recipe.ingredient_amount(params)
+      self.ingredient_amount
     end
   end
 
@@ -59,6 +59,31 @@ class Request
       text: list,
       shouldEndSession: true
     })
+  end
+
+  def self.ingredient_amount
+    query = @slots["Ingredient"]["value"]
+    recipe = Recipe.first # this will change to look up the current user's active recipe
+    ingredient_names = recipe["ingredients"].map { |i| i["name"] }
+    if ingredient_names.include?(query)
+      ing = recipe["ingredients"].detect { |ingredient| ingredient["name"] == query }
+      if ing["unit"].nil?
+        Response.new({
+          text: "You need #{ing["measurement"]} #{ing["name"]}. ",
+          shouldEndSession: true
+        })
+      else
+        Response.new({
+          text: "You need #{ing["measurement"]} #{ing["unit"]} of #{ing["name"]}. ",
+          shouldEndSession: true
+        })
+      end
+    else
+      Response.new({
+        text: "I couldn't find #{query} in this recipe.",
+        shouldEndSession: true
+      })
+    end
   end
 
 
