@@ -6,7 +6,8 @@ class WelcomeController < ApplicationController
   end
 
   def ask
-    response = Recipe.router(params)
+    req = Request.new(params)
+    response = req.route
     render :json => response.as_json, status: :ok
   end
 end
