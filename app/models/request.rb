@@ -70,8 +70,13 @@ class Request
     end
 
     if response_text == ""
+      list = "Here are the ingredients for #{recipe["name"]}. "
+      recipe["ingredients"].each do |ingredient|
+        list += recipe.format_ingredient(ingredient) + ", "
+      end
+      list += "."
       Response.new({
-        text: "I couldn't find #{query} in this recipe.",
+        text: "I couldn't find #{query} in this recipe." + list
         shouldEndSession: true
       })
     else
