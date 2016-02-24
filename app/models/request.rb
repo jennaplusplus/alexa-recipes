@@ -48,11 +48,12 @@ class Request
     recipe = Recipe.first
     list = "Here are the ingredients for #{recipe["name"]}. "
     recipe["ingredients"].each do |ingredient|
-      if ingredient["unit"].nil?
-        list += "#{ingredient["measurement"]} #{ingredient["name"]}, "
-      else
-        list += "#{ingredient["measurement"]} #{ingredient["unit"]} of #{ingredient["name"]}, "
-      end
+      # if ingredient["unit"].nil?
+      #   list += "#{ingredient["measurement"]} #{ingredient["name"]}, "
+      # else
+      #   list += "#{ingredient["measurement"]} #{ingredient["unit"]} of #{ingredient["name"]}, "
+      # end
+      list += recipe.format_ingredient(ingredient) + ", "
     end
     list += "."
     Response.new({
