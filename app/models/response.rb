@@ -3,14 +3,14 @@ class Response
   def initialize(info_hash)
     @version = "0.1.1"
     @response = {
-      "outputSpeech": {
-        "type": "PlainText",
-        "text": info_hash[:text]
+      "outputSpeech" => {
+        "type" => "PlainText",
+        "text" => info_hash[:text]
       },
-      "card": nil,
-      "reprompt": nil,
-      "shouldEndSession": info_hash[:shouldEndSession]
-    },
+      "card" => nil,
+      "reprompt" => nil,
+      "shouldEndSession" => info_hash[:shouldEndSession]
+    }
     @sessionAttributes = info_hash[:sessionAttributes]
   end
 
