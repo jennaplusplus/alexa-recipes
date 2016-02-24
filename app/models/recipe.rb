@@ -78,7 +78,7 @@ class Recipe
       })
     end
   end
-
+  #
   # def self.build_response(info_hash)
   #   response = {
   #     "version": "0.1.1",
