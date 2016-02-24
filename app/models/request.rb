@@ -38,7 +38,7 @@ class Request
         shouldEndSession: true
       })
     elsif @intent == "IngredientList"
-      Recipe.ingredient_list
+      self.ingredient_list
     elsif @intent == "IngredientAmount" || @intent == "IngredientNeeded"
       Recipe.ingredient_amount(params)
     end
