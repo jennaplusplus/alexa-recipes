@@ -5,8 +5,10 @@ class Request
     @data = params
     @type = params["request"]["type"]
     @session = params["session"]
-    @intent = params["request"]["intent"]["name"]
-    @ingredient_slot = params["request"]["intent"]["slots"]["Ingredient"]["value"]
+    if params["request"]["intent"]
+      @intent = params["request"]["intent"]["name"]
+      @slots = params["request"]["intent"]["slots"]
+    end
   end
 
   def route
