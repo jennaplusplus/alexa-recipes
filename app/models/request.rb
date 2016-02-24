@@ -68,7 +68,7 @@ class Request
     response_text = ""
 
     ingredient_names.each do |ingredient|
-      if query == "ingredient" || query.pluralize == "ingredient" || query.singularize == "ingredient"
+      if query == ingredient || query.pluralize == ingredient || query.singularize == ingredient
         response_text += "You need #{ingredient}. "
       end
     end
