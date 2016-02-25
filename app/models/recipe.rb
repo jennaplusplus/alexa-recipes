@@ -24,6 +24,7 @@ class Recipe
 
   def advance_step
     self["current_step"] += 1
+    self.save
   end
 
 end
