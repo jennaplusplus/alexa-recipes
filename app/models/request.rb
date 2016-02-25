@@ -49,6 +49,8 @@ class Request
       self.reset_step
     elsif @intent == "GoToStep"
       self.go_to_step
+    elsif @intent == "HowManySteps"
+      self.how_many_steps
     end
   end
 
@@ -165,6 +167,14 @@ class Request
         shouldEndSession: true
       })
     end
+  end
+
+  def how_many_steps
+    recipe = Recipe.first
+    Response.new({
+      text: "This recipe has #{recipe.number_of_steps} steps.",
+      shouldEndSession: true
+    })
   end
 
 
