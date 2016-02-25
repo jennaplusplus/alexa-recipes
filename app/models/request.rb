@@ -60,9 +60,21 @@ class Request
   def ingredient_amount
     query = @slots["Ingredient"]["value"]
     recipe = Recipe.first # this will change to look up the current user's active recipe
-    matches = recipe["ingredients"].select do |ingredient|
-      ingredient["name"].include?(query) || ingredient["name"].include?(query.pluralize) || ingredient["name"].include?(query.singularize)
+
+    query_set = Set.new
+    query.split.each do |word|
+      query_set.add(word)
+      query_set.add(word.singularize)
+      query_set.add(word.pluralize)
     end
+
+    matches = recipe["ingredients"].select do |ingredient|
+      query_set.any? { |word| ingredient["name"].include?(word)}
+    end
+
+    # matches = recipe["ingredients"].select do |ingredient|
+    #   ingredient["name"].include?(query) || ingredient["name"].include?(query.pluralize) || ingredient["name"].include?(query.singularize)
+    # end
 
     if matches.length == 0
       response = "I couldn't find #{query} in this recipe. "

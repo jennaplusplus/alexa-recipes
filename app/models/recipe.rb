@@ -4,9 +4,9 @@ class Recipe
 
   def format_ingredient(ingredient_hash)
     if ingredient_hash["unit"].nil?
-      "#{ingredient_hash["measurement"]} #{ingredient_hash["name"]} "
+      "#{ingredient_hash["measurement"]} #{ingredient_hash["name"]}"
     else
-      "#{ingredient_hash["measurement"]} #{ingredient_hash["unit"]} of #{ingredient_hash["name"]} "
+      "#{ingredient_hash["measurement"]} #{ingredient_hash["unit"]} of #{ingredient_hash["name"]}"
     end
   end
 
