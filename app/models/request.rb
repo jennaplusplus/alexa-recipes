@@ -109,7 +109,7 @@ class Request
     recipe = Recipe.first
     steps = recipe.steps
     Response.new({
-      text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"].to_i - 1]}",
+      text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
       shouldEndSession: true
     })
   end
