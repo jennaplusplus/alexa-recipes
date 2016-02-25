@@ -148,10 +148,15 @@ class Request
     query = @slots["Number"]["value"]
     recipe = Recipe.first
     steps = recipe.steps
-    if !query.nil?
+    if !query.nil? && query.to_i > 0 && query.to_i <= recipe.number_of_steps
       recipe.go_to_step(query)
       Response.new({
         text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
+        shouldEndSession: true
+      })
+    elsif query.to_i < 1 || query.to_i > recipe.number_of_steps
+      Response.new({
+        text: "For this recipe, you can ask for a step between 1 and #{recipe.number_of_steps}.",
         shouldEndSession: true
       })
     else
