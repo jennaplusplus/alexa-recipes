@@ -67,18 +67,20 @@ class Request
     query = @slots["Ingredient"]["value"]
     recipe = Recipe.first # this will change to look up the current user's active recipe
 
-    query_set = Set.new
-    query.split.each do |word|
-      query_set.add(word)
-      query_set.add(word.singularize)
-      query_set.add(word.pluralize)
+    if !query.nil?
+      query_set = Set.new
+      query.split.each do |word|
+        query_set.add(word)
+        query_set.add(word.singularize)
+        query_set.add(word.pluralize)
+      end
+
+      matches = recipe["ingredients"].select do |ingredient|
+        query_set.any? { |word| ingredient["name"].include?(word)}
+      end
     end
 
-    matches = recipe["ingredients"].select do |ingredient|
-      query_set.any? { |word| ingredient["name"].include?(word)}
-    end
-
-    if matches.length == 0
+    if query.nil? || matches.length == 0
       response = "I couldn't find that in this recipe. "
       response += "Here are the ingredients for #{recipe["name"]}. "
       recipe["ingredients"].each do |ingredient|
@@ -96,7 +98,7 @@ class Request
       end
       response += "and #{recipe.format_ingredient(matches[-1])}."
     end
-    
+
     Response.new({
       text: response,
       shouldEndSession: true
