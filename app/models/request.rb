@@ -51,6 +51,8 @@ class Request
       self.go_to_step
     elsif @intent == "HowManySteps"
       self.how_many_steps
+    elsif @intent == "GetPreviousStep"
+      self.get_previous_step
     end
   end
 
@@ -175,6 +177,24 @@ class Request
       text: "This recipe has #{recipe.number_of_steps} steps.",
       shouldEndSession: true
     })
+  end
+
+  def get_previous_step
+    recipe = Recipe.first
+    steps = recipe.steps
+    recipe.revert_step
+    if recipe["current_step"] < 1
+      recipe.advance_step
+      Response.new({
+        text: "You're already on the first step.",
+        shouldEndSession: true
+      })
+    else
+      Response.new({
+        text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
+        shouldEndSession: true
+      })
+    end
   end
 
 
