@@ -1,5 +1,5 @@
 class Request
-  attr_reader :data, :type, :session, :intent, :ingredient_slot
+  attr_reader :data, :type, :session, :intent, :slots
 
   def initialize(params)
     @data = params
