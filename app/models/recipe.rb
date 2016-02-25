@@ -27,4 +27,9 @@ class Recipe
     self.save
   end
 
+  def revert_step
+    self["current_step"] -= 1
+    self.save
+  end
+
 end

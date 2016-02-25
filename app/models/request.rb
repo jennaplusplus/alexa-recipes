@@ -113,10 +113,18 @@ class Request
     recipe = Recipe.first
     steps = recipe.steps
     recipe.advance_step
-    Response.new({
-      text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"].to_i - 1]}",
-      shouldEndSession: true
-    })
+    if recipe["current_step"] > recipe.number_of_steps
+      recipe.revert_step
+      Response.new({
+        text: "You've finished this recipe. Bon appétit!",
+        shouldEndSession: true
+      })
+    else
+      Response.new({
+        text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
+        shouldEndSession: true
+      })
+    end
   end
 
 
