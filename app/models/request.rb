@@ -147,7 +147,7 @@ class Request
   def go_to_step
     query = @slots["Number"]["value"]
     Response.new({
-      text: "Ok",
+      text: "Ok, step #{query}",
       shouldEndSession: true
     })
   end
