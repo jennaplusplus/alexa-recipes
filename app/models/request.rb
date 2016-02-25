@@ -116,7 +116,7 @@ class Request
     if recipe["current_step"] > recipe.number_of_steps
       recipe.revert_step
       Response.new({
-        text: "You've finished this recipe. Bon appétit!",
+        text: "You've finished this recipe. Enjoy!",
         shouldEndSession: true
       })
     else
