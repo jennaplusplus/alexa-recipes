@@ -39,8 +39,8 @@ class Request
       })
     elsif @intent == "IngredientList"
       self.ingredient_list
-    elsif @intent == "IngredientAmount"
-      self.ingredient_amount
+    elsif @intent == "GetIngredient"
+      self.get_ingredient
     end
   end
 
@@ -57,7 +57,7 @@ class Request
     })
   end
 
-  def ingredient_amount
+  def get_ingredient
     query = @slots["Ingredient"]["value"]
     recipe = Recipe.first # this will change to look up the current user's active recipe
 
