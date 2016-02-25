@@ -72,10 +72,6 @@ class Request
       query_set.any? { |word| ingredient["name"].include?(word)}
     end
 
-    # matches = recipe["ingredients"].select do |ingredient|
-    #   ingredient["name"].include?(query) || ingredient["name"].include?(query.pluralize) || ingredient["name"].include?(query.singularize)
-    # end
-
     if matches.length == 0
       response = "I couldn't find #{query} in this recipe. "
       response += "Here are the ingredients for #{recipe["name"]}. "
@@ -92,7 +88,7 @@ class Request
       matches[0..-2].each do |match|
         response += "#{recipe.format_ingredient(match)}, "
       end
-      response += " and #{recipe.format_ingredient(matches[-1])}."
+      response += "and #{recipe.format_ingredient(matches[-1])}."
     end
     Response.new({
       text: response,
