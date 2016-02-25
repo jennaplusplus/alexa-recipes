@@ -146,10 +146,19 @@ class Request
 
   def go_to_step
     query = @slots["Number"]["value"]
-    Response.new({
-      text: "Ok, step #{query}",
-      shouldEndSession: true
-    })
+    steps = recipe.steps
+    if !query.nil?
+      recipe.go_to_step(query)
+      Response.new({
+        text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
+        shouldEndSession: true
+      })
+    else
+      Response.new({
+        text: "Sorry, I didn't understand.",
+        shouldEndSession: true
+      })
+    end
   end
 
 

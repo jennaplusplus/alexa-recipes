@@ -37,4 +37,9 @@ class Recipe
     self.save
   end
 
+  def go_to_step(number)
+    self["current_step"] = number.to_i
+    self.save
+  end
+
 end
