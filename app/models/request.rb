@@ -146,6 +146,7 @@ class Request
 
   def go_to_step
     query = @slots["Number"]["value"]
+    recipe = Recipe.first
     steps = recipe.steps
     if !query.nil?
       recipe.go_to_step(query)
