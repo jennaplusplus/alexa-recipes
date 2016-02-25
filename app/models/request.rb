@@ -73,7 +73,7 @@ class Request
     end
 
     if matches.length == 0
-      response = "I couldn't find #{query} in this recipe. "
+      response = "I couldn't find that in this recipe. "
       response += "Here are the ingredients for #{recipe["name"]}. "
       recipe["ingredients"].each do |ingredient|
         response += recipe.format_ingredient(ingredient) + ", "
