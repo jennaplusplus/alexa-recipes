@@ -100,9 +100,9 @@ class Request
 
   def get_current_step
     recipe = Recipe.first
-    # steps = recipe.steps
+    steps = recipe.steps
     Response.new({
-      text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}.",
+      text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"].to_i - 1]}",
       shouldEndSession: true
     })
   end
