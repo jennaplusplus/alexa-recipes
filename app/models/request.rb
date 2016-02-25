@@ -47,6 +47,8 @@ class Request
       self.get_next_step
     elsif @intent == "ResetStep"
       self.reset_step
+    elsif @intent == "GoToStep"
+      self.go_to_step
     end
   end
 
@@ -138,6 +140,14 @@ class Request
     recipe.reset_step
     Response.new({
       text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
+      shouldEndSession: true
+    })
+  end
+
+  def go_to_step
+    query = @slots["Number"]["value"]
+    Response.new({
+      text: "Ok",
       shouldEndSession: true
     })
   end
