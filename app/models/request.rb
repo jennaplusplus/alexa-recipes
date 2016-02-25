@@ -60,31 +60,32 @@ class Request
   def ingredient_amount
     query = @slots["Ingredient"]["value"]
     recipe = Recipe.first # this will change to look up the current user's active recipe
-    ingredient_names = recipe["ingredients"].map { |i| i["name"] }
-    response_text = ""
-
-    ingredient_names.each do |ingredient|
-      if query == ingredient || query.pluralize == ingredient || query.singularize == ingredient
-        response_text += "You need #{recipe.format_ingredient(recipe.get_ingredient_hash(ingredient))}. "
-      end
+    matches = recipe["ingredients"].select do |ingredient|
+      ingredient["name"].include?(query) || ingredient["name"].include?(query.pluralize) || ingredient["name"].include?(query.singularize)
     end
 
-    if response_text == ""
-      list = "Here are the ingredients for #{recipe["name"]}. "
+    if matches.length == 0
+      response = "I couldn't find #{query} in this recipe. "
+      response += "Here are the ingredients for #{recipe["name"]}. "
       recipe["ingredients"].each do |ingredient|
-        list += recipe.format_ingredient(ingredient) + ", "
+        response += recipe.format_ingredient(ingredient) + ", "
       end
-      list += "."
-      Response.new({
-        text: "I couldn't find #{query} in this recipe. " + list,
-        shouldEndSession: true
-      })
-    else
-      Response.new({
-        text: response_text,
-        shouldEndSession: true
-      })
+      response += "."
+    elsif matches.length == 1
+      response = "You need #{recipe.format_ingredient(matches[0])}. "
+    elsif matches.length == 2
+      response = "You need #{recipe.format_ingredient(matches[0])} and #{recipe.format_ingredient(matches[1])}. "
+    elsif matches.length > 2
+      response = "You need "
+      matches[0..-2].each do |match|
+        response += "#{recipe.format_ingredient(match)}, "
+      end
+      response += " and #{recipe.format_ingredient(matches[-1])}."
     end
+    Response.new({
+      text: response,
+      shouldEndSession: true
+    })
   end
 
 
