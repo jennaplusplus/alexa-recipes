@@ -82,7 +82,7 @@ class Request
       response = "I couldn't find that in this recipe. "
       response += "Here are the ingredients for #{recipe["name"]}. "
       recipe["ingredients"].each do |ingredient|
-        response += recipe.format_ingredient(ingredient) + ", "
+        response += "#{recipe.format_ingredient(ingredient)}, "
       end
       response += "."
     elsif matches.length == 1
@@ -96,6 +96,7 @@ class Request
       end
       response += "and #{recipe.format_ingredient(matches[-1])}."
     end
+    
     Response.new({
       text: response,
       shouldEndSession: true
