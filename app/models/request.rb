@@ -41,6 +41,8 @@ class Request
       self.ingredient_list
     elsif @intent == "GetIngredient"
       self.get_ingredient
+    elsif @intent == "GetCurrentStep"
+      self.get_current_step
     end
   end
 
@@ -92,6 +94,15 @@ class Request
     end
     Response.new({
       text: response,
+      shouldEndSession: true
+    })
+  end
+
+  def get_current_step
+    recipe = Recipe.first
+    # steps = recipe.steps
+    Response.new({
+      text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}.",
       shouldEndSession: true
     })
   end

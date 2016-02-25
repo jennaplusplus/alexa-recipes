@@ -14,4 +14,12 @@ class Recipe
     self["ingredients"].detect { |ingredient| ingredient["name"] == ingredient_name }
   end
 
+  def number_of_steps
+    self["steps"].length
+  end
+
+  def steps
+    self["steps"]
+  end
+
 end
