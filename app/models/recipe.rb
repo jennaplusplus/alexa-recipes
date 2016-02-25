@@ -32,4 +32,9 @@ class Recipe
     self.save
   end
 
+  def reset_step
+    self["current_step"] = 1
+    self.save
+  end
+
 end

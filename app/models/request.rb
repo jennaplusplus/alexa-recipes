@@ -45,6 +45,8 @@ class Request
       self.get_current_step
     elsif @intent == "GetNextStep"
       self.get_next_step
+    elsif @intent == "ResetStep"
+      self.reset_step
     end
   end
 
@@ -125,6 +127,16 @@ class Request
         shouldEndSession: true
       })
     end
+  end
+
+  def reset_step
+    recipe = Recipe.first
+    steps = recipe.steps
+    recipe.reset_step
+    Response.new({
+      text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
+      shouldEndSession: true
+    })
   end
 
 
