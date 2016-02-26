@@ -55,6 +55,8 @@ class Request
       self.get_previous_step
     elsif @intent == "HowManyStepsLeft"
       self.how_many_steps_left
+    else
+      self.no_intent
     end
   end
 
@@ -211,6 +213,13 @@ class Request
     end
     Response.new({
       text: text,
+      shouldEndSession: true
+    })
+  end
+
+  def no_intent
+    Response.new({
+      text: "I don't understand the question and I won't respond to it.",
       shouldEndSession: true
     })
   end
