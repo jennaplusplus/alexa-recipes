@@ -18,9 +18,16 @@ class Recipe
     self["steps"].length
   end
 
-  def steps
-    self["steps"]
+  ["steps", "ingredients"].each do |attribute|
+    define_method(attribute.to_sym) do 
+      self[attribute]
+    end
   end
+
+  #
+  # def steps
+  #   self["steps"]
+  # end
 
   def advance_step
     self["current_step"] += 1
