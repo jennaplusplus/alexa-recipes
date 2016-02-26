@@ -164,7 +164,7 @@ class Request
       })
     elsif query.to_i < 1 || query.to_i > recipe.number_of_steps
       Response.new({
-        text: "For this recipe, you can ask for a step from 1 to #{recipe.number_of_steps}.",
+        text: "For this recipe, you can ask for a step between 1 and #{recipe.number_of_steps}.",
         shouldEndSession: true
       })
     else
