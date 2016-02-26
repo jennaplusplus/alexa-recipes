@@ -53,6 +53,8 @@ class Request
       self.how_many_steps
     elsif @intent == "GetPreviousStep"
       self.get_previous_step
+    elsif @intent == "HowManyStepsLeft"
+      self.how_many_steps_left
     end
   end
 
@@ -197,5 +199,20 @@ class Request
     end
   end
 
+  def how_many_steps_left
+    recipe = Recipe.first
+    left = recipe.number_of_steps - recipe["current_step"]
+    if left == 0
+      text = "You're on the last step."
+    elsif left == 1
+      text = "After this step, there is one more step."
+    else
+      text = "After this step, there are #{left} steps left."
+    end
+    Response.new({
+      text: text,
+      shouldEndSession: true
+    })
+  end
 
 end
