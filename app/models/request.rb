@@ -68,8 +68,21 @@ class Request
       self.how_many_steps_left
     elsif @intent == "GetRecipeName"
       self.get_recipe_name
+    elsif @intent == "GoToRecipe"
+      self.go_to_recipe
     else
       self.no_intent
+    end
+  end
+
+  def go_to_recipe
+    recipe_name = @slots["Recipe"]["value"]
+    recipe = Recipe.find_by(:name => /#{recipe_name}/i)
+    if recipe
+      Response.new({
+        text: "I found your recipe for #{recipe["name"]}",
+        shouldEndSession: true
+      })
     end
   end
 
