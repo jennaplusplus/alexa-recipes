@@ -21,11 +21,22 @@ class Request
 
   def launch
     Response.new({
-      text: "Welcome to Recipes! Would you like a list of ingredients?",
-      shouldEndSession: false,
+      text: "Welcome to Recipes!",
+      shouldEndSession: true,
       sessionAttributes: {"question": "list of ingredients"}
     })
   end
+
+  # def launch
+  #   Response.new({
+  #     text: "Welcome to Recipes! Would you like a list of ingredients?",
+  #     shouldEndSession: false,
+  #     sessionAttributes: {"question": "list of ingredients"}
+  #   })
+  # end
+
+  # methods = { "IngredientList" => :ingredient_list }
+  # use send
 
   def intent
     if @intent == "AMAZON.YesIntent"
