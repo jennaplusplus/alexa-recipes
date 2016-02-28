@@ -70,9 +70,24 @@ class Request
       self.get_recipe_name
     elsif @intent == "GoToRecipe"
       self.go_to_recipe
+    elsif @intent == "RecipeList"
+      self.recipe_list
     else
       self.no_intent
     end
+  end
+
+  def recipe_list
+    recipes = Recipe.all
+    list = "Here are your available recipes. "
+    recipes.each do |recipe|
+      list += recipe["name"] + ", "
+    end
+    list += "."
+    Response.new({
+      text: list,
+      shouldEndSession: true
+    })
   end
 
   def go_to_recipe
