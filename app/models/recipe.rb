@@ -19,12 +19,11 @@ class Recipe
   end
 
   ["steps", "ingredients"].each do |attribute|
-    define_method(attribute.to_sym) do 
+    define_method(attribute.to_sym) do
       self[attribute]
     end
   end
 
-  #
   # def steps
   #   self["steps"]
   # end

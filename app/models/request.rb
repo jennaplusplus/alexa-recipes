@@ -90,24 +90,24 @@ class Request
     })
   end
 
-  def go_to_recipe
-    recipe_name = @slots["Recipe"]["value"]
-    recipe = Recipe.find_by(:name => /#{recipe_name}/i)
-    if recipe
-      old_recipe = Recipe.find_by(active: true)
-      old_recipe["active"] = false
-      old_recipe.save
-      recipe["active"] = true
-      recipe.save
-      Response.new({
-        text: "I found your recipe for #{recipe["name"]}",
-        shouldEndSession: true
-      })
-    end
-  end
+  # def go_to_recipe
+  #   recipe_name = @slots["Recipe"]["value"]
+  #   recipe = Recipe.find_by(:name => /#{recipe_name}/i)
+  #   if recipe
+  #     old_recipe = Recipe.first
+  #     old_recipe["active"] = false
+  #     old_recipe.save
+  #     recipe["active"] = true
+  #     recipe.save
+  #     Response.new({
+  #       text: "I found your recipe for #{recipe["name"]}",
+  #       shouldEndSession: true
+  #     })
+  #   end
+  # end
 
   def ingredient_list
-    recipe = Recipe.find_by(active: true)
+    recipe = Recipe.first
     list = "Here are the ingredients for #{recipe["name"]}. "
     recipe["ingredients"].each do |ingredient|
       list += recipe.format_ingredient(ingredient) + ", "
@@ -121,7 +121,7 @@ class Request
 
   def get_ingredient
     query = @slots["Ingredient"]["value"]
-    recipe = Recipe.find_by(active: true) # this will change to look up the current user's active recipe
+    recipe = Recipe.first # this will change to look up the current user's active recipe
 
     if !query.nil?
       query_set = Set.new
@@ -162,7 +162,7 @@ class Request
   end
 
   def get_current_step
-    recipe = Recipe.find_by(active: true)
+    recipe = Recipe.first
     steps = recipe.steps
     Response.new({
       text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
@@ -171,7 +171,7 @@ class Request
   end
 
   def get_next_step
-    recipe = Recipe.find_by(active: true)
+    recipe = Recipe.first
     steps = recipe.steps
     recipe.advance_step
     if recipe["current_step"] > recipe.number_of_steps
@@ -189,7 +189,7 @@ class Request
   end
 
   def reset_step
-    recipe = Recipe.find_by(active: true)
+    recipe = Recipe.first
     steps = recipe.steps
     recipe.reset_step
     Response.new({
@@ -200,7 +200,7 @@ class Request
 
   def go_to_step
     query = @slots["Number"]["value"]
-    recipe = Recipe.find_by(active: true)
+    recipe = Recipe.first
     steps = recipe.steps
     if !query.nil? && query.to_i > 0 && query.to_i <= recipe.number_of_steps
       recipe.go_to_step(query)
@@ -222,7 +222,7 @@ class Request
   end
 
   def how_many_steps
-    recipe = Recipe.find_by(active: true)
+    recipe = Recipe.first
     Response.new({
       text: "This recipe has #{recipe.number_of_steps} steps.",
       shouldEndSession: true
@@ -230,7 +230,7 @@ class Request
   end
 
   def get_previous_step
-    recipe = Recipe.find_by(active: true)
+    recipe = Recipe.first
     steps = recipe.steps
     recipe.revert_step
     if recipe["current_step"] < 1
@@ -248,7 +248,7 @@ class Request
   end
 
   def how_many_steps_left
-    recipe = Recipe.find_by(active: true)
+    recipe = Recipe.first
     left = recipe.number_of_steps - recipe["current_step"]
     if left == 0
       text = "You're on the last step."
@@ -264,7 +264,7 @@ class Request
   end
 
   def get_recipe_name
-    recipe = Recipe.find_by(active: true)
+    recipe = Recipe.first
     Response.new({
       text: "This is your recipe for #{recipe["name"]}.",
       shouldEndSession: true
