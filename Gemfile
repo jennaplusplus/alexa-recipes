@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# async
+gem 'sidekiq'
+
 # auth
 gem 'devise'
 
