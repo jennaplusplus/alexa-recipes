@@ -70,6 +70,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-async (0.10.1)
+      devise (~> 3.2)
     dotenv (2.1.0)
     dotenv-rails (2.1.0)
       dotenv (= 2.1.0)
@@ -192,6 +194,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  devise-async
   dotenv-rails
   jbuilder (~> 2.0)
   jquery-rails
