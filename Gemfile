@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# auth
+gem 'devise'
+
 # for SSL
 gem 'passenger'
 
