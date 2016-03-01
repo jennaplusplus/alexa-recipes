@@ -1,6 +1,18 @@
 class User
   include Mongoid::Document
-  has_many :recipes
+  include Amatch
+
+  has_many :recipes do
+    def get_pair_distances(query)
+      base = PairDistance.new(query)
+      results = {}
+      self.each do |recipe|
+        results[recipe] = base.match(recipe["name"])
+      end
+      return results
+    end
+  end
+
   field :name, type: String
 
   # Include default devise modules. Others available are:

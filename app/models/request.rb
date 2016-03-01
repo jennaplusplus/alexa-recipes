@@ -79,6 +79,22 @@ class Request
     })
   end
 
+  def go_to_recipe
+    # recipes = @user.recipes
+    target_recipe = @slots["Recipe"]["value"]
+    if target_recipe.nil?
+      Response.new({
+        text: "Sorry, I didn't understand",
+        shouldEndSession: true
+      })
+    else
+      Response.new({
+        text: "Yes, I understood",
+        shouldEndSession: true
+      })
+    end
+  end
+
   def ingredient_list
     recipe = @user.active_recipe
     list = "Here are the ingredients for #{recipe["name"]}. "
