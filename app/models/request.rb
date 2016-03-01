@@ -96,12 +96,19 @@ class Request
     distances = recipes.get_pair_distances(target_recipe)
     ranked = distances.keys.sort_by { |key| distances[key] }.reverse!
     selection = ranked[0]
-    @user.active_recipe.deactivate
-    selection.activate
-    Response.new({
-      text: "I found your recipe for #{selection["name"]}.",
-      shouldEndSession: true
-    })
+    former = @user.active_recipe
+    if selection.activate
+      former.deactivate
+      return Response.new({
+        text: "I found your recipe for #{selection["name"]}.",
+        shouldEndSession: true
+      })
+    else
+      Response.new({
+        text: "Sorry, I couldn't access the recipe you asked for.",
+        shouldEndSession: true
+      })
+    end
   end
 
   def ingredient_list
