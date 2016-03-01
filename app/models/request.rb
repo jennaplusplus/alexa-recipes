@@ -9,7 +9,7 @@ class Request
       @intent = params["request"]["intent"]["name"]
       @slots = params["request"]["intent"]["slots"]
     end
-    @user = User.find_by(amazon_id: params["user"]["userId"])
+    @user = User.find_by(amazon_id: params["session"]["user"]["userId"])
   end
 
   def route
