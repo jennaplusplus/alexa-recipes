@@ -1,5 +1,5 @@
 class Request
-  attr_reader :data, :type, :session, :intent, :slots
+  attr_reader :data, :type, :session, :intent, :slots, :user
 
   def initialize(params)
     @data = params
@@ -9,6 +9,7 @@ class Request
       @intent = params["request"]["intent"]["name"]
       @slots = params["request"]["intent"]["slots"]
     end
+    @user = User.find_by(amazon_id: params["user"]["userId"])
   end
 
   def route
@@ -22,21 +23,9 @@ class Request
   def launch
     Response.new({
       text: "Welcome to Recipes!",
-      shouldEndSession: true,
-      sessionAttributes: {"question": "list of ingredients"}
+      shouldEndSession: true
     })
   end
-
-  # def launch
-  #   Response.new({
-  #     text: "Welcome to Recipes! Would you like a list of ingredients?",
-  #     shouldEndSession: false,
-  #     sessionAttributes: {"question": "list of ingredients"}
-  #   })
-  # end
-
-  # methods = { "IngredientList" => :ingredient_list }
-  # use send
 
   def intent
     if @intent == "AMAZON.YesIntent"
@@ -89,22 +78,6 @@ class Request
       shouldEndSession: true
     })
   end
-
-  # def go_to_recipe
-  #   recipe_name = @slots["Recipe"]["value"]
-  #   recipe = Recipe.find_by(:name => /#{recipe_name}/i)
-  #   if recipe
-  #     old_recipe = Recipe.first
-  #     old_recipe["active"] = false
-  #     old_recipe.save
-  #     recipe["active"] = true
-  #     recipe.save
-  #     Response.new({
-  #       text: "I found your recipe for #{recipe["name"]}",
-  #       shouldEndSession: true
-  #     })
-  #   end
-  # end
 
   def ingredient_list
     recipe = Recipe.first
