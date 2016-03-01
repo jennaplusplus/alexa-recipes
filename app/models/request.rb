@@ -94,7 +94,7 @@ class Request
       })
     end
     distances = recipes.get_pair_distances(target_recipe)
-    ranked = matches.keys.sort_by { |key| distances[key] }.reverse!
+    ranked = distances.keys.sort_by { |key| distances[key] }.reverse!
     selection = ranked[0]
     Response.new({
       text: "I found your recipe for #{selection["name"]}.",
