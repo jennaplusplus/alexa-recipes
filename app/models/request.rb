@@ -80,19 +80,26 @@ class Request
   end
 
   def go_to_recipe
-    # recipes = @user.recipes
+    recipes = @user.recipes
     target_recipe = @slots["Recipe"]["value"]
     if target_recipe.nil?
-      Response.new({
-        text: "Sorry, I didn't understand",
+      return Response.new({
+        text: "Sorry, I didn't understand which recipe you asked for.",
         shouldEndSession: true
       })
-    else
-      Response.new({
-        text: "Yes, I understood",
+    elsif recipes.empty?
+      return Response.new({
+        text: "Sorry, you don't have any saved recipes.",
         shouldEndSession: true
       })
     end
+    distances = recipes.get_pair_distances(target_recipe)
+    ranked = matches.keys.sort_by { |key| distances[key] }.reverse!
+    selection = ranked[0]
+    Response.new({
+      text: "I found your recipe for #{selection["name"]}.",
+      shouldEndSession: true
+    })
   end
 
   def ingredient_list
