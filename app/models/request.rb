@@ -96,6 +96,8 @@ class Request
     distances = recipes.get_pair_distances(target_recipe)
     ranked = distances.keys.sort_by { |key| distances[key] }.reverse!
     selection = ranked[0]
+    @user.active_recipe.deactivate
+    selection.activate
     Response.new({
       text: "I found your recipe for #{selection["name"]}.",
       shouldEndSession: true
