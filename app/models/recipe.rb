@@ -1,5 +1,6 @@
 class Recipe
   include Mongoid::Document
+  belongs_to :user
   field :name, type: String
 
   def format_ingredient(ingredient_hash)

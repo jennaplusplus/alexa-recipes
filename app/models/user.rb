@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  has_many :recipes
   field :name, type: String
 
   # Include default devise modules. Others available are:
