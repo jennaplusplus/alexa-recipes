@@ -67,7 +67,7 @@ class Request
   end
 
   def recipe_list
-    recipes = Recipe.all
+    recipes = @user.recipes
     list = "Here are your available recipes. "
     recipes.each do |recipe|
       list += recipe["name"] + ", "
@@ -80,7 +80,7 @@ class Request
   end
 
   def ingredient_list
-    recipe = Recipe.first
+    recipe = @user.active_recipe
     list = "Here are the ingredients for #{recipe["name"]}. "
     recipe["ingredients"].each do |ingredient|
       list += recipe.format_ingredient(ingredient) + ", "
