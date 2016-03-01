@@ -2,10 +2,11 @@ source 'https://rubygems.org'
 
 # async
 gem 'sidekiq'
-gem 'devise-async'
 
 # auth
 gem 'devise'
+gem 'devise-async'
+
 
 # for SSL
 gem 'passenger'
