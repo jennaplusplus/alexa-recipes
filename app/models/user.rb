@@ -50,6 +50,6 @@ class User
   # field :locked_at,       type: Time
 
   def active_recipe
-    self.recipes.find_by(active: true)
+    self.recipes.find(self["active_recipe_id"])
   end
 end
