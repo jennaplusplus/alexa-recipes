@@ -7,7 +7,6 @@ class WelcomeController < ApplicationController
 
   def ask
     req = Request.new(params)
-    puts req
     response = req.route
     render :json => response.as_json, status: :ok
   end
