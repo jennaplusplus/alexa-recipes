@@ -270,33 +270,42 @@ class Request
     })
   end
 
+  # def go_to_ordinal_step
+  #   query = @slots["OrdinalNumber"]["value"]
+  #   query = MAPPINGS[query] if !query.nil?
+  #
+  #   recipe = @user.active_recipe
+  #   steps = recipe.steps
+  #   if !query.nil? && query.to_i > 0 && query.to_i <= recipe.number_of_steps
+  #     recipe.go_to_step(query)
+  #     Response.new({
+  #       text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
+  #       shouldEndSession: true
+  #     })
+  #   elsif query.to_i < 1 || query.to_i > recipe.number_of_steps
+  #     Response.new({
+  #       text: "For this recipe, you can ask for a step between 1 and #{recipe.number_of_steps}.",
+  #       shouldEndSession: true
+  #     })
+  #   else
+  #     Response.new({
+  #       text: "Sorry, I didn't understand.",
+  #       shouldEndSession: true
+  #     })
+  #   end
+  # end
+
   def go_to_ordinal_step
     query = @slots["OrdinalNumber"]["value"]
-    query = MAPPINGS[query] if !query.nil?
-
-    recipe = @user.active_recipe
-    steps = recipe.steps
-    if !query.nil? && query.to_i > 0 && query.to_i <= recipe.number_of_steps
-      recipe.go_to_step(query)
-      Response.new({
-        text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
-        shouldEndSession: true
-      })
-    elsif query.to_i < 1 || query.to_i > recipe.number_of_steps
-      Response.new({
-        text: "For this recipe, you can ask for a step between 1 and #{recipe.number_of_steps}.",
-        shouldEndSession: true
-      })
-    else
-      Response.new({
-        text: "Sorry, I didn't understand.",
-        shouldEndSession: true
-      })
-    end
+    self.go_to_step(MAPPINGS[query])
   end
 
-  def go_to_step
-    query = @slots["Number"]["value"]
+  def go_to_step(ordinal_slot=nil)
+    if ordinal_slot
+      query = ordinal_slot
+    else
+      query = @slots["Number"]["value"]
+    end
     recipe = @user.active_recipe
     steps = recipe.steps
     if !query.nil? && query.to_i > 0 && query.to_i <= recipe.number_of_steps
