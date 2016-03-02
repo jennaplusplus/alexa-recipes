@@ -50,6 +50,7 @@ class User
   # field :locked_at,       type: Time
 
   def active_recipe
+    return nil if self["active_recipe_id"].nil?
     self.recipes.find(self["active_recipe_id"])
   end
 end
