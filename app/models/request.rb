@@ -61,7 +61,7 @@ class Request
           return Response.new({
             text: "Sorry, you don't have an open recipe. Which recipe would you like to open?",
             shouldEndSession: false,
-            sessionAttributes: {"question" => "list of ingredients"}
+            sessionAttributes: {"question" => "which recipe"}
           })
         end
       else
@@ -106,8 +106,9 @@ class Request
       @user["active_recipe_id"] = selection.id
       @user.save
       return Response.new({
-        text: "I found your recipe for #{selection["name"]}.",
-        shouldEndSession: true
+        text: "I found your recipe for #{selection["name"]}. Would you like a list of ingredients?",
+        shouldEndSession: false,
+        sessionAttributes: { "question" => "list of ingredients" }
       })
     else
       Response.new({
