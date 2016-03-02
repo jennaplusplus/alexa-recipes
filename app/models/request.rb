@@ -37,6 +37,7 @@ class Request
     "GoToOrdinalStep"   => :go_to_ordinal_step,
     "HowManySteps"      => :how_many_steps,
     "GetPreviousStep"   => :get_previous_step,
+    "GoToFinalStep"     => :go_to_final_step,
     "HowManyStepsLeft"  => :how_many_steps_left,
     "GetRecipeName"     => :get_recipe_name,
     "GoToRecipe"        => :go_to_recipe,
@@ -45,8 +46,6 @@ class Request
   }
 
   MAPPINGS = {
-    "last" => 0,
-    "final" => 0,
     "1st" => 1,
     "2nd" => 2,
     "3rd" => 3,
@@ -300,6 +299,16 @@ class Request
         shouldEndSession: true
       })
     end
+  end
+
+  def go_to_final_step
+    recipe = @user.active_recipe
+    steps = recipe.steps
+    recipe.go_to_step(recipe.number_of_steps - 1)
+    Response.new({
+      text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
+      shouldEndSession: true
+    })
   end
 
   def how_many_steps
