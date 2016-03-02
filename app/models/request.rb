@@ -39,6 +39,7 @@ class Request
     "HowManyStepsLeft"  => :how_many_steps_left,
     "GetRecipeName"     => :get_recipe_name,
     "GoToRecipe"        => :go_to_recipe,
+    "SayRecipeName"     => :go_to_recipe,
     "RecipeList"        => :recipe_list
   }
 
