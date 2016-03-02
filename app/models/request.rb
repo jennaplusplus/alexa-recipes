@@ -304,7 +304,7 @@ class Request
   def go_to_final_step
     recipe = @user.active_recipe
     steps = recipe.steps
-    recipe.go_to_step(recipe.number_of_steps - 1)
+    recipe.go_to_step(recipe.number_of_steps)
     Response.new({
       text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
       shouldEndSession: true
