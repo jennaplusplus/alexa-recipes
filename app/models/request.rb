@@ -57,7 +57,7 @@ class Request
       if @intent != "GoToRecipe" && @intent != "RecipeList" && @user.active_recipe.nil?
         return Response.new({
           text: "Sorry, you don't have an open recipe. Which recipe would like to open?",
-          shouldEndSession: false
+          shouldEndSession: false,
           sessionAttributes: {"question": "which recipe"}
         })
       else
