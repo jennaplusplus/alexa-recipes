@@ -34,6 +34,7 @@ class Request
     "GetNextStep"       => :get_next_step,
     "ResetStep"         => :reset_step,
     "GoToStep"          => :go_to_step,
+    "GoToOrdinalStep"   => :go_to_ordinal_step,
     "HowManySteps"      => :how_many_steps,
     "GetPreviousStep"   => :get_previous_step,
     "HowManyStepsLeft"  => :how_many_steps_left,
@@ -41,6 +42,41 @@ class Request
     "GoToRecipe"        => :go_to_recipe,
     "SayRecipeName"     => :go_to_recipe,
     "RecipeList"        => :recipe_list
+  }
+
+  MAPPINGS = {
+    "last" => 0,
+    "final" => 0,
+    "1st" => 1,
+    "2nd" => 2,
+    "3rd" => 3,
+    "4th" => 4,
+    "5th" => 5,
+    "6th" => 6,
+    "7th" => 7,
+    "8th" => 8,
+    "9th" => 9,
+    "10th" => 10,
+    "11th" => 11,
+    "12th" => 12,
+    "13th" => 13,
+    "14th" => 14,
+    "15th" => 15,
+    "16th" => 16,
+    "17th" => 17,
+    "18th" => 18,
+    "19th" => 19,
+    "20th" => 20,
+    "21st" => 21,
+    "22nd" => 22,
+    "23rd" => 23,
+    "24th" => 24,
+    "25th" => 25,
+    "26th" => 26,
+    "27th" => 27,
+    "28th" => 28,
+    "29th" => 29,
+    "30th" => 30
   }
 
   def intent
@@ -213,6 +249,31 @@ class Request
       text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
       shouldEndSession: true
     })
+  end
+
+  def go_to_ordinal_step
+    query = @slots["OrdinalNumber"]["value"]
+    query = MAPPINGS[query] if !query.nil?
+
+    recipe = @user.active_recipe
+    steps = recipe.steps
+    if !query.nil? && query.to_i > 0 && query.to_i <= recipe.number_of_steps
+      recipe.go_to_step(query)
+      Response.new({
+        text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
+        shouldEndSession: true
+      })
+    elsif query.to_i < 1 || query.to_i > recipe.number_of_steps
+      Response.new({
+        text: "For this recipe, you can ask for a step between 1 and #{recipe.number_of_steps}.",
+        shouldEndSession: true
+      })
+    else
+      Response.new({
+        text: "Sorry, I didn't understand.",
+        shouldEndSession: true
+      })
+    end
   end
 
   def go_to_step
