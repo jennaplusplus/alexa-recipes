@@ -15,7 +15,7 @@ gem 'devise-async'
 gem 'passenger'
 
 # secrets
-gem 'dotenv-rails', :groups => [:development, :test]
+gem 'dotenv-rails'
 
 # mongo
 gem 'mongoid', '~> 5.1', '>= 5.1.1'

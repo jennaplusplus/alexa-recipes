@@ -84,6 +84,6 @@ Rails.application.configure do
     :user_name => ENV['SMTP_USERNAME'],
     :password => ENV['SMTP_PASSWORD'],
     :enable_starttls_auto => true,
-    :port => 587
+    :port => 465
   }
 end
