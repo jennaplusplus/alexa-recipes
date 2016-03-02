@@ -47,6 +47,11 @@ class Request
     if @intent == "AMAZON.YesIntent"
       if @session["attributes"]["question"] == "list of ingredients"
         self.ingredient_list
+      else
+        return Response.new({
+          text: "I don't understand the question and I won't respond to it.",
+          shouldEndSession: true
+        })
       end
     elsif @intent == "AMAZON.NoIntent"
       Response.new({
