@@ -45,7 +45,7 @@ class Request
 
   def intent
     if @intent == "AMAZON.YesIntent"
-      if @session["attributes"]["question"] == "list of ingredients"
+      if @session["attributes"] && @session["attributes"]["question"] == "list of ingredients"
         self.ingredient_list
       else
         return Response.new({
