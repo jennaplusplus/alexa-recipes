@@ -73,4 +73,17 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'dev.alexarecipes.com', port: 443 }
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.smtp_settings = {
+    :address => 'email-smtp.us-east-1.amazonaws.com',
+    :authentication => :login,
+    :user_name => ENV['SMTP_USERNAME'],
+    :password => ENV['SMTP_PASSWORD'],
+    :enable_starttls_auto => true,
+    :port => 465
+  }
 end
