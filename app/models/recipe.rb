@@ -25,10 +25,6 @@ class Recipe
     end
   end
 
-  # def steps
-  #   self["steps"]
-  # end
-
   def advance_step
     self["current_step"] += 1
     self.save

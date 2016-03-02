@@ -55,8 +55,9 @@ class Request
     elsif METHODS[@intent]
       if @intent != "GoToRecipe" && @intent != "RecipeList" && @user.active_recipe.nil?
         return Response.new({
-          text: "Sorry, you don't have an open recipe.",
-          shouldEndSession: true
+          text: "Sorry, you don't have an open recipe. Which recipe would like to open?",
+          shouldEndSession: false
+          sessionAttributes: {"question": "which recipe"}
         })
       else
         self.send(METHODS[@intent])
