@@ -54,9 +54,9 @@ class Request
         shouldEndSession: true
       })
     elsif METHODS[@intent]
-      if @intent != "GoToRecipe" && @intent != "RecipeList" && @user.active_recipe.nil?
+      if @intent != "GoToRecipe" && @intent != "RecipeList" && @user.active_recipe.nil? && @session["attributes"]["question"] != "which recipe"
         return Response.new({
-          text: "Sorry, you don't have an open recipe. Which recipe would like to open?",
+          text: "Sorry, you don't have an open recipe. Which recipe would you like to open?",
           shouldEndSession: false,
           sessionAttributes: {"question": "which recipe"}
         })
