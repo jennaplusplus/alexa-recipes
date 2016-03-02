@@ -27,6 +27,21 @@ class Request
     })
   end
 
+  METHODS = {
+    "IngredientList"    => :ingredient_list,
+    "GetIngredient"     => :get_ingredient,
+    "GetCurrentStep"    => :get_current_step,
+    "GetNextStep"       => :get_next_step,
+    "ResetStep"         => :reset_step,
+    "GoToStep"          => :go_to_step,
+    "HowManySteps"      => :how_many_steps,
+    "GetPreviousStep"   => :get_previous_step,
+    "HowManyStepsLeft"  => :how_many_steps_left,
+    "GetRecipeName"     => :get_recipe_name,
+    "GoToRecipe"        => :go_to_recipe,
+    "RecipeList"        => :recipe_list
+  }
+
   def intent
     if @intent == "AMAZON.YesIntent"
       if @session["attributes"]["question"] == "list of ingredients"
@@ -37,32 +52,10 @@ class Request
         text: "Ok.",
         shouldEndSession: true
       })
-    elsif @intent == "IngredientList"
-      self.ingredient_list
-    elsif @intent == "GetIngredient"
-      self.get_ingredient
-    elsif @intent == "GetCurrentStep"
-      self.get_current_step
-    elsif @intent == "GetNextStep"
-      self.get_next_step
-    elsif @intent == "ResetStep"
-      self.reset_step
-    elsif @intent == "GoToStep"
-      self.go_to_step
-    elsif @intent == "HowManySteps"
-      self.how_many_steps
-    elsif @intent == "GetPreviousStep"
-      self.get_previous_step
-    elsif @intent == "HowManyStepsLeft"
-      self.how_many_steps_left
-    elsif @intent == "GetRecipeName"
-      self.get_recipe_name
-    elsif @intent == "GoToRecipe"
-      self.go_to_recipe
-    elsif @intent == "RecipeList"
-      self.recipe_list
+    elsif METHODS[@intent]
+      self.send(METHODS[@intent])
     else
-      self.no_intent
+      self.bad_intent
     end
   end
 
@@ -276,7 +269,7 @@ class Request
     })
   end
 
-  def no_intent
+  def bad_intent
     Response.new({
       text: "I don't understand the question and I won't respond to it.",
       shouldEndSession: true
