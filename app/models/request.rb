@@ -53,7 +53,14 @@ class Request
         shouldEndSession: true
       })
     elsif METHODS[@intent]
-      self.send(METHODS[@intent])
+      if @intent != "GoToRecipe" && @intent != "RecipeList" && @user.active_recipe.nil?
+        return Response.new({
+          text: "Sorry, you don't have an open recipe.",
+          shouldEndSession: true
+        })
+      else
+        self.send(METHODS[@intent])
+      end
     else
       self.bad_intent
     end
