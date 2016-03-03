@@ -107,6 +107,8 @@ class Request
         self.recipe_list
       elsif @session["attributes"] && @session["attributes"]["question"] == "want this recipe"
         selection = Recipe.find(@session["attributes"]["recipe_id"])
+        @user["active_recipe_id"] = selection.id
+        @user.save
         return Response.new({
           text: "I found your recipe for #{selection["name"]}. Would you like a list of ingredients?",
           shouldEndSession: false,
