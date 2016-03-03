@@ -46,7 +46,8 @@ class Request
     "GetServings"       => :get_servings,
     "GetPrepTime"       => :get_prep_time,
     "GetDescription"    => :get_description,
-    "GetNotes"          => :get_notes
+    "GetNotes"          => :get_notes,
+    "GetSteps"          => :get_steps
   }
 
   MAPPINGS = {
@@ -463,6 +464,22 @@ class Request
       text = "Here are your notes. #{recipe.notes}."
     else
       text = "There are no notes for this recipe."
+    end
+    Response.new({
+      text: text,
+      shouldEndSession: true
+    })
+  end
+
+  def get_steps
+    recipe = @user.active_recipe
+    if recipe.steps
+      text = "Here's a list of all the steps for #{recipe.name}. "
+      recipe.steps.each do |step|
+        text += "#{step}. "
+      end
+    else
+      text = "There are no steps saved for this recipe."
     end
     Response.new({
       text: text,
