@@ -154,14 +154,14 @@ class Request
       })
     elsif recipes.empty?
       return Response.new({
-        text: "Sorry, you don't have any saved recipes.",
+        text: "You don't have any saved recipes. Add some on alexa recipes dot com!",
         shouldEndSession: true
       })
     end
     distances = recipes.get_pair_distances(target_recipe)
     ranked = distances.keys.sort_by { |key| distances[key] }.reverse!
-    selection = ranked[0]
-    if selection
+    if distance[ranked[0]] >= 0.3
+      selection = ranked[0]
       @user["active_recipe_id"] = selection.id
       @user.save
       return Response.new({
