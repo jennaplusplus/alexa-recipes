@@ -200,7 +200,7 @@ class Request
       else
         list_of_names = ""
         possibilities.each do |recipe|
-          list_of_names.push("#{recipe["name"]}, ")
+          list_of_names += "#{recipe["name"]}, "
         end
         return Response.new({
           text: "Which of these recipes did you mean?",
