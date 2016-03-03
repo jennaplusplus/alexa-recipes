@@ -57,6 +57,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'rspec-rails'
   gem 'simplecov'
+  gem 'factory_girl_rails'
 end
 
 group :development do
