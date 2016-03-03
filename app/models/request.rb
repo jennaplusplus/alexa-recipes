@@ -271,11 +271,18 @@ class Request
 
   def go_to_ordinal_step
     query = @slots["OrdinalNumber"]["value"]
-    self.go_to_step(MAPPINGS[query])
+    if MAPPINGS[query].nil?
+      ordinal_slot = "out of bounds"
+    else
+      ordinal_slot = MAPPINGS[query]
+    end
+    self.go_to_step(value)
   end
 
   def go_to_step(ordinal_slot=nil)
-    if ordinal_slot
+    if ordinal_slot == "out of bounds"
+      query = nil
+    elsif ordinal_slot
       query = ordinal_slot
     else
       query = @slots["Number"]["value"]
