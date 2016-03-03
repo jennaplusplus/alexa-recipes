@@ -162,7 +162,7 @@ class Request
     end
     distances = recipes.get_pair_distances(target_recipe)
     ranked = distances.keys.sort_by { |key| distances[key] }.reverse!
-    if distances[ranked[0]] >= 0.3
+    if distances[ranked[0]] >= 0.9
       selection = ranked[0]
       @user["active_recipe_id"] = selection.id
       @user.save
