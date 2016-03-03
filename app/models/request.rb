@@ -148,7 +148,7 @@ class Request
 
   def go_to_recipe
     recipes = @user.recipes
-    target_recipe = @slots["Recipe"]["value"].downcase
+    target_recipe = @slots["Recipe"]["value"]
     if target_recipe.nil?
       return Response.new({
         text: "Sorry, I didn't understand which recipe you asked for.",
@@ -160,7 +160,7 @@ class Request
         shouldEndSession: true
       })
     end
-    distances = recipes.get_pair_distances(target_recipe)
+    distances = recipes.get_pair_distances(target_recipe.downcase)
     ranked = distances.keys.sort_by { |key| distances[key] }.reverse! # array of recipe documents sorted from best to worst match
     if distances[ranked[0]] >= 0.9
       selection = ranked[0]
