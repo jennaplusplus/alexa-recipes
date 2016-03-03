@@ -19,7 +19,7 @@ class Recipe
     self["steps"].length
   end
 
-  ["steps", "ingredients", "cook_time", "prep_time", "servings"].each do |attribute|
+  ["steps", "ingredients", "cook_time", "prep_time", "servings", "description", "notes"].each do |attribute|
     define_method(attribute.to_sym) do
       self[attribute]
     end
