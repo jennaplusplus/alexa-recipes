@@ -102,7 +102,7 @@ class Request
       if @session["attributes"] && @session["attributes"]["question"] == "list of ingredients"
         self.ingredient_list
       elsif @session["attributes"] && @session["attributes"]["question"] == "list of recipes"
-        self.receip_list
+        self.receipe_list
       else
         return Response.new({
           text: "I don't understand the question and I won't respond to it.",
