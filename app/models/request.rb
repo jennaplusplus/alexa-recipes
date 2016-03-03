@@ -103,6 +103,13 @@ class Request
         self.ingredient_list
       elsif @session["attributes"] && @session["attributes"]["question"] == "list of recipes"
         self.recipe_list
+      elsif @session["attributes"] && @session["attributes"]["question"] == "want this recipe"
+        selection = Recipe.find(@session["attributes"]["recipe_id"])
+        return Response.new({
+          text: "I found your recipe for #{selection["name"]}. Would you like a list of ingredients?",
+          shouldEndSession: false,
+          sessionAttributes: { "question" => "list of ingredients" }
+        })
       else
         return Response.new({
           text: "I don't understand the question and I won't respond to it.",
@@ -188,7 +195,8 @@ class Request
       if possibilities.length == 1
         return Response.new({
           text: "Is this the recipe you wanted? #{possibilities[0]["name"]}",
-          shouldEndSession: true,
+          shouldEndSession: false,
+          sessionAttributes: { "question" => "want this recipe", "recipe_id" => possibilities[0].id }
           })
       else
         return Response.new({
