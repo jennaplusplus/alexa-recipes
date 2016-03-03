@@ -161,7 +161,7 @@ class Request
       })
     end
     distances = recipes.get_pair_distances(target_recipe)
-    ranked = distances.keys.sort_by { |key| distances[key] }.reverse!
+    ranked = distances.keys.sort_by { |key| distances[key] }.reverse! # array of recipe documents sorted from best to worst match
     if distances[ranked[0]] >= 0.9
       selection = ranked[0]
       @user["active_recipe_id"] = selection.id
@@ -178,10 +178,24 @@ class Request
         sessionAttributes: { "question" => "list of recipes" }
       })
     else
-      Response.new({
-        text: "Middle of the road, baby.",
-        shouldEndSession: true,
-      })
+      possibilities = []
+      i = 0
+      while distances[ranked[i]] >= 0.3
+        possibilities.push(ranked[i])
+        i += 1
+      end
+
+      if possibilities.length == 1
+        return Response.new({
+          text: "Is this the recipe you wanted? #{possibilities[0]["name"]}",
+          shouldEndSession: true,
+          })
+      else
+        return Response.new({
+          text: "I found a few possibilities.",
+          shouldEndSession: true,
+          })
+      end
     end
   end
 
