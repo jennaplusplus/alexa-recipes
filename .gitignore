@@ -7,7 +7,7 @@
 .DS_Store
 .env
 dump.rdb
-
+coverage
 
 
 # Ignore bundler config.
