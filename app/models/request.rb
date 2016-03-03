@@ -47,7 +47,8 @@ class Request
     "GetPrepTime"       => :get_prep_time,
     "GetDescription"    => :get_description,
     "GetNotes"          => :get_notes,
-    "GetSteps"          => :get_steps
+    "GetSteps"          => :get_steps,
+    "PreviewRecipe"     => :preview_recipe
   }
 
   MAPPINGS = {
@@ -483,6 +484,13 @@ class Request
     end
     Response.new({
       text: text,
+      shouldEndSession: true
+    })
+  end
+
+  def preview_recipe
+    Response.new({
+      text: "Heyyyyy",
       shouldEndSession: true
     })
   end
