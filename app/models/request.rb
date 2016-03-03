@@ -42,7 +42,9 @@ class Request
     "GetRecipeName"     => :get_recipe_name,
     "GoToRecipe"        => :go_to_recipe,
     "SayRecipeName"     => :go_to_recipe,
-    "RecipeList"        => :recipe_list
+    "RecipeList"        => :recipe_list,
+    "GetServings"       => :get_servings,
+    "GetPrepTime"       => :get_prep_time
   }
 
   MAPPINGS = {
@@ -398,6 +400,42 @@ class Request
     recipe = @user.active_recipe
     Response.new({
       text: "This is your recipe for #{recipe["name"]}.",
+      shouldEndSession: true
+    })
+  end
+
+  def get_servings
+    recipe = @user.active_recipe
+    if recipe.servings
+      if recipe.servings == 1
+        text = "This recipe makes 1 serving."
+      elsif recipe.servings > 1
+        text = "This recipe makes #{recipe.servings} servings."
+      else
+        text = "There is no serving information available for this recipe."
+      end
+    else
+      text = "There is no serving information available for this recipe."
+    end
+    Response.new({
+      text: text,
+      shouldEndSession: true
+    })
+  end
+
+  def get_prep_time
+    recipe = @user.active_recipe
+    if recipe.prep_time && recipe.cook_time
+      text = "This recipe takes #{recipe.prep_time} to prepare and #{recipe.cook_time} to cook."
+    elsif recipe.prep_time
+      text = "This recipe takes #{recipe.prep_time} to prepare."
+    elsif recipe.cook_time
+      text = "This recipe takes #{recipe.cook_time} to cook."
+    else
+      text = "There is no preparation time or cook time available for this recipe."
+    end
+    Response.new({
+      text: text,
       shouldEndSession: true
     })
   end
