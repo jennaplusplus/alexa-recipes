@@ -171,11 +171,16 @@ class Request
         shouldEndSession: false,
         sessionAttributes: { "question" => "list of ingredients" }
       })
-    else
+    elsif distances[ranked[0]] < 0.3
       Response.new({
         text: "None of your saved recipes matched your request. Would you like to hear a list of your saved recipes?",
         shouldEndSession: false,
         sessionAttributes: { "question" => "list of recipes" }
+      })
+    else
+      Response.new({
+        text: "Middle of the road, baby.",
+        shouldEndSession: true,
       })
     end
   end
