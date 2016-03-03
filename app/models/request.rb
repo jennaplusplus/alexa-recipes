@@ -101,6 +101,8 @@ class Request
     if @intent == "AMAZON.YesIntent"
       if @session["attributes"] && @session["attributes"]["question"] == "list of ingredients"
         self.ingredient_list
+      elsif @session["attributes"] && @session["attributes"]["question"] == "list of recipes"
+        self.receip_list
       else
         return Response.new({
           text: "I don't understand the question and I won't respond to it.",
@@ -171,8 +173,9 @@ class Request
       })
     else
       Response.new({
-        text: "Sorry, I couldn't access the recipe you asked for.",
-        shouldEndSession: true
+        text: "None of your saved recipes matched your request. Would you like to hear a list of your saved recipes?",
+        shouldEndSession: false,
+        sessionAttributes: { "question" => "list of recipes" }
       })
     end
   end
