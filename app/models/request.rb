@@ -170,7 +170,7 @@ class Request
         text: "I found your recipe for #{selection["name"]}. Would you like a list of ingredients?",
         shouldEndSession: false,
         sessionAttributes: { "question" => "list of ingredients" }
-      }
+      })
     else
       Response.new({
         text: "None of your saved recipes matched your request. Would you like to hear a list of your saved recipes?",
