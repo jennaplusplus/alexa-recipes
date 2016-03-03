@@ -198,6 +198,10 @@ class Request
           sessionAttributes: { "question" => "want this recipe", "recipe_id" => possibilities[0].id }
         })
       else
+        list_of_names = ""
+        possibilities.each do |recipe|
+          list_of_names.push("#{recipe["name"]}, ")
+        end
         return Response.new({
           text: "Which of these recipes did you mean?",
           shouldEndSession: false,
