@@ -191,18 +191,18 @@ class Request
         possibilities.push(ranked[i])
         i += 1
       end
-
       if possibilities.length == 1
         return Response.new({
           text: "Is this the recipe you wanted? #{possibilities[0]["name"]}",
           shouldEndSession: false,
           sessionAttributes: { "question" => "want this recipe", "recipe_id" => possibilities[0].id }
-          })
+        })
       else
         return Response.new({
-          text: "I found a few possibilities.",
-          shouldEndSession: true,
-          })
+          text: "Which of these recipes did you mean?",
+          shouldEndSession: false,
+          sessionAttributes: { "question" => "which recipe" }
+        })
       end
     end
   end
