@@ -203,7 +203,7 @@ class Request
           list_of_names += "#{recipe["name"]}, "
         end
         return Response.new({
-          text: "Which of these recipes did you mean? #{list_of_names}",
+          text: "Which of these recipes did you mean? #{list_of_names}.",
           shouldEndSession: false,
           sessionAttributes: { "question" => "which recipe" }
         })
