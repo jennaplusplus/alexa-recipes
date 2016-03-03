@@ -489,8 +489,52 @@ class Request
   end
 
   def preview_recipe
+    recipe = @user.active_recipe
+    text = "Here's an overview for your recipe for #{recipe.name}. "
+
+    if recipe.description
+      text += "The recipe has the following description. #{recipe.description}. "
+    end
+
+    if recipe.prep_time && recipe.cook_time
+      text += "This recipe takes #{recipe.prep_time} to prepare and #{recipe.cook_time} to cook. "
+    elsif recipe.prep_time
+      text += "This recipe takes #{recipe.prep_time} to prepare. "
+    elsif recipe.cook_time
+      text += "This recipe takes #{recipe.cook_time} to cook. "
+    end
+
+    if recipe.servings
+      if recipe.servings == 1
+        text += "The recipe makes 1 serving. "
+      elsif recipe.servings > 1
+        text += "The recipe makes #{recipe.servings} servings. "
+      else
+      end
+    end
+
+    if recipe.notes
+      text += "The recipe has the following notes. #{recipe.notes}. "
+    end
+
+    list = "The recipe has the following ingredients. "
+    recipe.ingredients.each do |ingredient|
+      list += recipe.format_ingredient(ingredient) + ", "
+    end
+    list += ". "
+    text += list
+
+    if recipe.number_of_steps == 1
+      text += "Finally, the recipe has the following 1 step. #{recipe.steps[0]}. "
+    elsif recipe.number_of_steps > 1
+      text += "Finally, the recipe has the following #{recipe.number_of_steps} steps. "
+      recipe.steps.each do |step|
+        text += "#{step}. "
+      end
+    end
+
     Response.new({
-      text: "Heyyyyy",
+      text: text,
       shouldEndSession: true
     })
   end
