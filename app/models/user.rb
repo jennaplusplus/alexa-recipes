@@ -7,7 +7,7 @@ class User
       base = PairDistance.new(query)
       results = {}
       self.each do |recipe|
-        results[recipe] = base.match(recipe["name"])
+        results[recipe] = base.match(recipe["name"].downcase)
       end
       return results
     end

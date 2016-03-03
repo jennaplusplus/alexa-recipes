@@ -148,7 +148,7 @@ class Request
 
   def go_to_recipe
     recipes = @user.recipes
-    target_recipe = @slots["Recipe"]["value"]
+    target_recipe = @slots["Recipe"]["value"].downcase
     if target_recipe.nil?
       return Response.new({
         text: "Sorry, I didn't understand which recipe you asked for.",
@@ -170,7 +170,7 @@ class Request
         text: "I found your recipe for #{selection["name"]}. Would you like a list of ingredients?",
         shouldEndSession: false,
         sessionAttributes: { "question" => "list of ingredients" }
-      })
+      }
     else
       Response.new({
         text: "None of your saved recipes matched your request. Would you like to hear a list of your saved recipes?",
