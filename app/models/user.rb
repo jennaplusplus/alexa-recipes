@@ -14,6 +14,7 @@ class User
   end
 
   field :name, type: String
+  field :active_recipe_id, type: BSON::ObjectId
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -1,7 +1,16 @@
 class Recipe
   include Mongoid::Document
   belongs_to :user
+
   field :name, type: String
+  field :description, type: String
+  field :notes, type: String
+  field :cook_time, type: String
+  field :prep_time, type: String
+  field :servings, type: Integer
+  field :current_step, type: Integer
+  field :ingredients, type: Array
+  field :steps, type: Array
 
   def format_ingredient(ingredient_hash)
     if ingredient_hash["unit"].nil?
