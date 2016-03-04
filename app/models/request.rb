@@ -150,13 +150,19 @@ class Request
 
   def recipe_list
     recipes = @user.recipes
-    list = "Here are your available recipes. "
-    recipes.each do |recipe|
-      list += recipe["name"] + ", "
+    if recipes.length == 0
+      text = "You don't have any saved recipes. Add some on alexa recipes dot com!"
+    elsif recipes.length == 1
+      text = "You have 1 saved recipe. #{recipes[0].name} ."
+    else
+      text = "You have #{recipes.length} available recipes. "
+      recipes.each do |recipe|
+        text += recipe["name"] + ", "
+      end
+      text += "."
     end
-    list += "."
     Response.new({
-      text: list,
+      text: text,
       shouldEndSession: true
     })
   end
