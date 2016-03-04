@@ -477,7 +477,7 @@ class Request
     if recipe.steps
       text = "Here's a list of all the steps for #{recipe.name}. "
       recipe.steps.each do |step|
-        text += "#{step}. "
+        text += "#{step.sub(/\.*$/, "")} . "
       end
     else
       text = "There are no steps saved for this recipe."
@@ -529,7 +529,7 @@ class Request
     elsif recipe.number_of_steps > 1
       text += "Finally, the recipe has the following #{recipe.number_of_steps} steps. "
       recipe.steps.each do |step|
-        text += "#{step}. "
+        text += "#{step.sub(/\.*$/, "")} . "
       end
     end
 
