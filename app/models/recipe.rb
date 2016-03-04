@@ -11,10 +11,6 @@ class Recipe
     end
   end
 
-  def get_ingredient_hash(ingredient_name)
-    self["ingredients"].detect { |ingredient| ingredient["name"] == ingredient_name }
-  end
-
   def number_of_steps
     self["steps"].length
   end

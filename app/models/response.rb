@@ -14,9 +14,4 @@ class Response
     @sessionAttributes = info_hash[:sessionAttributes]
   end
 
-  def with_ssml(text)
-    @response["outputSpeech"]["type"] = "SSML"
-    @reponse["outputSpeech"]["text"] = text
-  end
-
 end
