@@ -324,7 +324,7 @@ class Request
     else
       ordinal_slot = MAPPINGS[query]
     end
-    self.go_to_step(value)
+    self.go_to_step(ordinal_slot)
   end
 
   def go_to_step(ordinal_slot=nil)
