@@ -30,6 +30,12 @@ end
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
+  # clear out database omgggggg
+  config.before(:suite) do
+    User.all.destroy
+    Recipe.all.destroy
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
