@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   describe "#active_recipe" do
-
     before(:each) do
       @recipe = create(:recipe)
       @user = @recipe.user
@@ -19,5 +17,17 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#get_pair_distances(query)" do
+    before(:each) do
+      @recipe = create(:recipe)
+      @user = @recipe.user
+    end
+
+    it "returns a hash of recipes and distance values" do
+      query = "cookies"
+      expect(@user.recipes.get_pair_distances(query)).to be_a Hash
+      expect(@user.recipes.get_pair_distances(query).keys[0]).to be_an_instance_of Recipe
+    end
+  end
 
 end
