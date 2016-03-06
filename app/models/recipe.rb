@@ -46,8 +46,10 @@ class Recipe
   end
 
   def go_to_step(number)
-    self["current_step"] = number.to_i
-    self.save
+    if number > 0 && number <= self.steps.length
+      self["current_step"] = number.to_i
+      self.save
+    end
   end
 
 end
