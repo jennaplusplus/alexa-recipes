@@ -342,14 +342,9 @@ class Request
         text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
         shouldEndSession: true
       })
-    elsif query.to_i < 1 || query.to_i > recipe.number_of_steps
-      Response.new({
-        text: "For this recipe, you can ask for a step between 1 and #{recipe.number_of_steps}.",
-        shouldEndSession: true
-      })
     else
       Response.new({
-        text: "Sorry, I didn't understand.",
+        text: "For this recipe, you can ask for a step between 1 and #{recipe.number_of_steps}.",
         shouldEndSession: true
       })
     end

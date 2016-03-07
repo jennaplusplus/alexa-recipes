@@ -434,6 +434,133 @@ RSpec.describe Request, type: :model do
     end
   end
 
+  describe "#go_to_ordinal_step" do
+    let(:recipe) do
+      create(:recipe)
+    end
+
+    let(:intent_params) do
+      {
+        "session": {
+          "user": {
+            "userId": recipe.user.amazon_id
+          },
+        },
+        "request": {
+          "type": "IntentRequest",
+          "intent": {
+            "name": "GoToOrdinalStep",
+            "slots": {
+              "OrdinalNumber": {
+                "name": "OrdinalNumber",
+                "value": "fourth"
+              }
+            }
+          }
+        }
+      }.as_json
+    end
+    context "query is not within available bounds" do
+      it "maintains the current step" do
+        intent_params["request"]["intent"]["slots"]["OrdinalNumber"]["value"] = "50th"
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        current_step = req.user.active_recipe.current_step
+        req.go_to_ordinal_step
+        expect(req.user.active_recipe.current_step).to eq current_step
+      end
+      it "returns a response" do
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        expect(req.go_to_ordinal_step).to be_an_instance_of Response
+      end
+    end
+    context "query is within available bounds" do
+      it "updates the current step" do
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        req.go_to_ordinal_step
+        expect(req.user.active_recipe.current_step).to eq 4
+      end
+      it "returns a response" do
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        expect(req.go_to_ordinal_step).to be_an_instance_of Response
+      end
+    end
+  end
+
+  describe "#go_to_step" do
+    let(:recipe) do
+      create(:recipe)
+    end
+
+    let(:intent_params) do
+      {
+        "session": {
+          "user": {
+            "userId": recipe.user.amazon_id
+          },
+        },
+        "request": {
+          "type": "IntentRequest",
+          "intent": {
+            "name": "GoToStep",
+            "slots": {
+              "Number": {
+                "name": "Number",
+                "value": "3"
+              }
+            }
+          }
+        }
+      }.as_json
+    end
+    context "goes to the step if it's valid" do
+      it "updates the current step" do
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        req.go_to_step
+        expect(req.user.active_recipe.current_step).to eq 3
+      end
+      it "returns a response" do
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        expect(req.go_to_step).to be_an_instance_of Response
+      end
+    end
+    context "it does not go to the step if it's invalid" do
+      it "maintains the current step" do
+        intent_params["request"]["intent"]["slots"]["Number"]["value"] = "100"
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        current_step = req.user.active_recipe.current_step
+        req.go_to_step
+        expect(req.user.active_recipe.current_step).to eq current_step
+      end
+      it "returns a response" do
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        expect(req.go_to_step).to be_an_instance_of Response
+      end
+    end
+    context "desired step was not understood" do
+      it "maintains the current step" do
+        intent_params["request"]["intent"]["slots"]["Number"]["value"] = "?"
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        current_step = req.user.active_recipe.current_step
+        req.go_to_step
+        expect(req.user.active_recipe.current_step).to eq current_step
+      end
+      it "returns a response" do
+        req = Request.new(intent_params)
+        req.user["active_recipe_id"] = recipe.id
+        expect(req.go_to_step).to be_an_instance_of Response
+      end
+    end
+  end
+
   describe "#go_to_final_step" do
     let(:recipe) do
       create(:recipe)
