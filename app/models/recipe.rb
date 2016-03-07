@@ -31,13 +31,17 @@ class Recipe
   end
 
   def advance_step
-    self["current_step"] += 1
-    self.save
+    if self["current_step"] < self.steps.length
+      self["current_step"] += 1
+      self.save
+    end
   end
 
   def revert_step
-    self["current_step"] -= 1
-    self.save
+    if self["current_step"] > 1
+      self["current_step"] -= 1
+      self.save
+    end
   end
 
   def reset_step
