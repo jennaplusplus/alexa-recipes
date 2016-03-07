@@ -21,6 +21,7 @@ FactoryGirl.define do
     name "Test Subject"
     email { generate(:email) }
     password "password"
+    amazon_id "amazon_blahhh"
   end
 
 end
