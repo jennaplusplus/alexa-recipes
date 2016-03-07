@@ -292,14 +292,13 @@ class Request
   def get_next_step
     recipe = @user.active_recipe
     steps = recipe.steps
-    recipe.advance_step
-    if recipe["current_step"] > recipe.number_of_steps
-      recipe.revert_step
+    if recipe.current_step == recipe.number_of_steps
       Response.new({
         text: "You've finished this recipe. Enjoy!",
         shouldEndSession: true
       })
     else
+      recipe.advance_step
       Response.new({
         text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
         shouldEndSession: true
@@ -377,14 +376,13 @@ class Request
   def get_previous_step
     recipe = @user.active_recipe
     steps = recipe.steps
-    recipe.revert_step
-    if recipe["current_step"] < 1
-      recipe.advance_step
+    if recipe["current_step"] == 1
       Response.new({
         text: "You're already on the first step.",
         shouldEndSession: true
       })
     else
+      recipe.revert_step
       Response.new({
         text: "Step #{recipe["current_step"]} of #{recipe.number_of_steps}: #{steps[recipe["current_step"] - 1]}",
         shouldEndSession: true

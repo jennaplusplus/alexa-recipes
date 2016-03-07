@@ -59,6 +59,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'pry'
 end
 
 group :development do
