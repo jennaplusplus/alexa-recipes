@@ -140,6 +140,86 @@ RSpec.describe Request, type: :model do
     end
   end
 
+  describe "#go_to_recipe" do
+    let(:recipe) do
+      create(:recipe)
+    end
+
+    let(:intent_params) do
+      {
+        "session": {
+          "user": {
+            "userId": recipe.user.amazon_id
+          },
+        },
+        "request": {
+          "type": "IntentRequest",
+          "intent": {
+            "name": "GoToRecipe",
+            "slots": {
+              "Recipe": {
+                "name": "Recipe",
+                "value": "chocolate chip cookies"
+              }
+            }
+          }
+        }
+      }.as_json
+    end
+
+    let(:other_user) do
+      create(:user)
+    end
+
+    context "query is not understood" do
+      it "returns a response" do
+        intent_params["request"]["intent"]["slots"]["Recipe"]["value"] = nil
+        req = Request.new(intent_params)
+        expect(req.go_to_recipe).to be_an_instance_of Response
+      end
+    end
+    context "user has no recipes" do
+      it "returns a response" do
+        intent_params["session"]["user"]["userId"] = other_user.amazon_id
+        req = Request.new(intent_params)
+        expect(req.go_to_recipe).to be_an_instance_of Response
+      end
+    end
+    context "one good recipe match" do
+      it "returns a response" do
+        req = Request.new(intent_params)
+        expect(req.go_to_recipe).to be_an_instance_of Response
+      end
+    end
+    context "no good recipe matches" do
+      it "returns a response" do
+        intent_params["request"]["intent"]["slots"]["Recipe"]["value"] = "steak"
+        req = Request.new(intent_params)
+        expect(req.go_to_recipe).to be_an_instance_of Response
+      end
+    end
+    context "one potential match" do
+      it "returns a response" do
+        new_recipe = Recipe.new(name: "banana bread")
+        recipe.user.recipes << new_recipe
+        intent_params["request"]["intent"]["slots"]["Recipe"]["value"] = "bread"
+        req = Request.new(intent_params)
+        expect(req.go_to_recipe).to be_an_instance_of Response
+      end
+    end
+    context "several potential matches" do
+      it "returns a response" do
+        new_recipe = Recipe.new(name: "banana bread")
+        recipe.user.recipes << new_recipe
+        new_recipe = Recipe.new(name: "other bread")
+        recipe.user.recipes << new_recipe
+        intent_params["request"]["intent"]["slots"]["Recipe"]["value"] = "bread"
+        req = Request.new(intent_params)
+        expect(req.go_to_recipe).to be_an_instance_of Response
+      end
+    end
+  end
+
   describe "#get_ingredient" do
     let(:recipe) do
       create(:recipe)
@@ -1030,7 +1110,4 @@ RSpec.describe Request, type: :model do
       end
     end
   end
-
-
-
 end
