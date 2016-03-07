@@ -185,6 +185,10 @@ class Request
     ranked = distances.keys.sort_by { |key| distances[key] }.reverse! # array of recipe documents sorted from best to worst match
     if distances[ranked[0]] >= 0.9
       selection = ranked[0]
+      if selection["current_step"].nil?
+        selection["current_step"] = 1
+        selection.save
+      end
       @user["active_recipe_id"] = selection.id
       @user.save
       return Response.new({

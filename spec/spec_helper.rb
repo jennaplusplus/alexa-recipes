@@ -6,6 +6,7 @@ SimpleCov.start do
   add_filter 'spec/'
   add_filter 'config/'
   add_filter 'app/helpers/'
+  add_filter 'app/controllers/application_controller'
 end
 
 

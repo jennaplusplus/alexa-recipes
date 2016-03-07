@@ -92,6 +92,46 @@ RSpec.describe Request, type: :model do
     end
   end
 
+  describe "#intent" do
+    let(:recipe) do
+      create(:recipe)
+    end
+
+    let(:intent_params) do
+      {
+        "session": {
+          "user": {
+            "userId": recipe.user.amazon_id
+          },
+          "attributes": {
+
+          },
+        },
+        "request": {
+          "type": "IntentRequest",
+          "intent": {
+            "name": "TBD",
+            "slots": {}
+          }
+        }
+      }.as_json
+    end
+    context "the user said yes about something" do
+      it "returns a response" do
+        intent_params["request"]["intent"]["name"] = "AMAZON.YesIntent"
+        req = Request.new(intent_params)
+        expect(req.route).to be_an_instance_of Response
+      end
+    end
+    context "the user said no about something" do
+      it "returns a response" do
+        intent_params["request"]["intent"]["name"] = "AMAZON.NoIntent"
+        req = Request.new(intent_params)
+        expect(req.route).to be_an_instance_of Response
+      end
+    end
+  end
+
   describe "#recipe_list" do
     let(:user) do
       create(:user)
@@ -159,7 +199,7 @@ RSpec.describe Request, type: :model do
             "slots": {
               "Recipe": {
                 "name": "Recipe",
-                "value": "chocolate chip cookies"
+                "value": "baked potato"
               }
             }
           }
@@ -187,6 +227,8 @@ RSpec.describe Request, type: :model do
     end
     context "one good recipe match" do
       it "returns a response" do
+        new_recipe = Recipe.new(name: "baked potato")
+        recipe.user.recipes << new_recipe
         req = Request.new(intent_params)
         expect(req.go_to_recipe).to be_an_instance_of Response
       end
