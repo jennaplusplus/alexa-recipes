@@ -8,6 +8,7 @@
 .env
 dump.rdb
 coverage
+sidekiq.pid
 
 
 # Ignore bundler config.
