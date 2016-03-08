@@ -9,10 +9,13 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   post 'ask' => 'welcome#ask'
+  get 'about' => 'welcome#about'
 
-  resources :users do
+  resources :users, only: [:index] do
     resources :recipes
   end
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

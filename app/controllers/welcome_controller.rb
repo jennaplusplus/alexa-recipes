@@ -4,6 +4,9 @@ class WelcomeController < ApplicationController
   def index
   end
 
+  def about
+  end
+
   def ask
     req = Request.new(params)
     response = req.route
