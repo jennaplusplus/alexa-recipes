@@ -5,16 +5,24 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
+  <link href='https://fonts.googleapis.com/css?family=Copse|Open+Sans' rel='stylesheet' type='text/css'></head>
 <body>
-  <nav class="navbar navbar-inverse">
+  <!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
-      <%= link_to 'Devise Demo', root_path, class: 'navbar-brand' %>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'Alexa Recipes', root_path, class: 'navbar-brand' %>
     </div>
-    <div id="navbar">
+    <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'Home', root_path %></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <% if user_signed_in? %>
@@ -33,7 +41,7 @@
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
         <% end %>
       </ul>
-    </div>
+    </div><!--/.nav-collapse -->
   </div>
 </nav>
 
@@ -45,10 +53,7 @@
     <% end %>
   </div>
 
-  <%= yield :top_content %>
-
   <div class="container">
-      <h1><%= yield :header %></h1>
     <%= yield %>
   </div>
 

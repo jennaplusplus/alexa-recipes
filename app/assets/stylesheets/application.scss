@@ -14,3 +14,20 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.navbar-inverse .navbar-brand {
+  color: #01ABCC;
+  font-family: 'Copse', serif;
+  font-size: 30px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.navbar {
+  border-radius: 0px;
+}
