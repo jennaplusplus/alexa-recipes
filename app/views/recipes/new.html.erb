@@ -20,6 +20,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <%= f.label :name %>
+        <p> The best recipe names are short and simple, like <em>Chocolate Chip Cookies</em> or <em>Pizza Dough</em>.</p>
         <%= f.text_field :name, class: "form-control" %>
       </div>
     </div>
@@ -29,19 +30,34 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :prep_time %>
+        <p> A time like
+          <em>10 minutes </em>
+          or
+          <em>1 1/2 hours</em>
+        </p>
         <%= f.text_field :prep_time, class: "form-control" %>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :cook_time %>
+        <p> A time like
+          <em>10 minutes </em>
+          or
+          <em>1 1/2 hours</em>
+        </p>
         <%= f.text_field :cook_time, class: "form-control" %>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :servings %>
-        <%= f.text_field :servings, class: "form-control" %>
+        <p> A number like
+          <em>4</em>
+          or
+          <em>24</em>
+        </p>
+        <%= f.number_field :servings, min: 1, class: "form-control" %>
       </div>
     </div>
   </div>
@@ -52,10 +68,20 @@
         <%= f.label :description %>
         <%= f.text_field :description, class: "form-control" %>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       <div class="form-group">
         <%= f.label :ingredients %>
         <%= f.text_area :ingredients, class: "form-control" %>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       <div class="form-group">
         <%= f.label :steps %>
         <%= f.text_area :steps, class: "form-control" %>
@@ -67,6 +93,7 @@
       <%= f.submit "Submit", class: "btn btn-default" %>
     </div>
   </div>
+
 
 
 
