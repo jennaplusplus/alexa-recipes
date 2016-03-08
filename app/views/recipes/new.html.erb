@@ -11,7 +11,7 @@
         <% end %>
       </ul>
     <% end %>
-    <%= form_for [@user, @recipe], :html => { :class => "form" } do |f| %>
+    <%= form_for [current_user, @recipe], :html => { :class => "form" } do |f| %>
       <div class="form-group">
         <%= f.label :name %>
         <%= f.text_field :name, class: "form-control" %>
