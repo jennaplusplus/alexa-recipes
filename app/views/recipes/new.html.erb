@@ -1,7 +1,7 @@
 <h1>New Recipe</h1>
 
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-md-12">
     <% if @recipe.errors %>
       <ul>
         <% @recipe.errors.each do |column, message| %>
@@ -11,12 +11,63 @@
         <% end %>
       </ul>
     <% end %>
-    <%= form_for [current_user, @recipe], :html => { :class => "form" } do |f| %>
+  </div>
+</div>
+
+<%= form_for [current_user, @recipe], :html => { :class => "<form></form>" } do |f| %>
+
+  <div class="row">
+    <div class="col-md-12">
       <div class="form-group">
         <%= f.label :name %>
         <%= f.text_field :name, class: "form-control" %>
       </div>
-      <%= f.submit "Submit", class: "btn btn-default" %>
-    <% end %>
+    </div>
   </div>
-</div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :prep_time %>
+        <%= f.text_field :prep_time, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :cook_time %>
+        <%= f.text_field :cook_time, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :servings %>
+        <%= f.text_field :servings, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :ingredients %>
+        <%= f.text_area :ingredients, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :steps %>
+        <%= f.text_area :steps, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :notes %>
+        <%= f.text_area :notes, class: "form-control" %>
+      </div>
+      <%= f.submit "Submit", class: "btn btn-default" %>
+    </div>
+  </div>
+
+
+
+<% end %>
