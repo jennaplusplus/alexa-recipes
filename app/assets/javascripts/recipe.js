@@ -5,7 +5,18 @@ $( document ).ready(function() {
     var $lastRow = $("#ingredients-table tr:last");
     for (var i = 0; i < 3; i++) {
       var $newRow = $lastRow.clone();
+      $newRow.find(':input').val('');
       $("#ingredients-table tbody").append($newRow);
+    }
+  });
+
+  $("#more-steps").click(function () {
+    for (var i = 0; i < 3; i++) {
+      var $step = $("div.step:last");
+      var $newStep = $step.clone();
+      var newNumber = Number($newStep.find('.input-group-addon').text()) + 1;
+      $newStep.find('.input-group-addon').text(newNumber + '.');
+      $step.after($newStep);
     }
   });
 

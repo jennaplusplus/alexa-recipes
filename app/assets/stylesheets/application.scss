@@ -40,8 +40,12 @@ body {
   border-radius: 0px;
 }
 
-div#steps {
+div.step {
 	margin-bottom: 10px;
+}
+
+button#more-steps {
+  margin-top: 18px;
 }
 
 #ingredient-table tr td:nth-child(1) {

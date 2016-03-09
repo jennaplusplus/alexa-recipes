@@ -158,11 +158,12 @@
     <div class="panel-body">
       <p>Enter each step separately, in the way you want Alexa to read them. Short, manageable steps will work best!</p>
         <% 5.times do |n| %>
-          <div class="input-group" id="steps">
+          <div class="input-group step">
             <div class="input-group-addon"><%= n + 1 %>.</div>
             <input class="form-control" type="text" name="recipe[steps][]">
           </div>
         <% end %>
+        <button type="button" class="btn btn-info" id="more-steps">Add more steps</button>
     </div>
   </div>
 
