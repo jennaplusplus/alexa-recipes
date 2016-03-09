@@ -3,5 +3,5 @@
 <h2><%= @recipe.name %></h2>
 
 <% @recipe.ingredients.each do |ing| %>
-  <%= ing.attributes %>
+  <%= ing["name"] %>
 <% end %>

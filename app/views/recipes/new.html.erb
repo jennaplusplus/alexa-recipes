@@ -16,63 +16,77 @@
 
 <%= form_for [current_user, @recipe], :html => { :class => "form" } do |f| %>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <%= f.label :name %>
-        <p> The best recipe names are short and simple, like <em>Chocolate Chip Cookies</em> or <em>Pizza Dough</em>.</p>
-        <%= f.text_field :name, class: "form-control" %>
-      </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.label :name %></h3>
+    </div>
+    <div class="panel-body">
+      <p> The best recipe names are short and simple, like <em>Chocolate Chip Cookies</em> or <em>Pizza Dough</em>.</p>
+      <%= f.text_field :name, class: "form-control" %>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :prep_time %>
-        <p> A time like
-          <em>10 minutes </em>
-          or
-          <em>1 1/2 hours</em>
-        </p>
-        <%= f.text_field :prep_time, class: "form-control" %>
-      </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.label :prep_time %></h3>
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :cook_time %>
-        <p> A time like
-          <em>10 minutes </em>
-          or
-          <em>1 1/2 hours</em>
-        </p>
-        <%= f.text_field :cook_time, class: "form-control" %>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.label :servings %>
-        <p> A number like
-          <em>4</em>
-          or
-          <em>24</em>
-        </p>
-        <%= f.number_field :servings, min: 1, class: "form-control" %>
-      </div>
+    <div class="panel-body">
+      <p> A time like
+        <em>10 minutes </em>
+        or
+        <em>1 1/2 hours</em>
+      </p>
+      <%= f.text_field :prep_time, class: "form-control" %>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <%= f.label :description %>
-        <%= f.text_field :description, class: "form-control" %>
-      </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.label :cook_time %></h3>
+    </div>
+    <div class="panel-body">
+      <p> A time like
+        <em>10 minutes </em>
+        or
+        <em>1 1/2 hours</em>
+      </p>
+      <%= f.text_field :cook_time, class: "form-control" %>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.label :servings %></h3>
+    </div>
+    <div class="panel-body">
+      <p> A number like
+        <em>5</em>
+        or
+        <em>10</em>
+      </p>
+      <%= f.number_field :servings, min: 1, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.label :description %></h3>
+    </div>
+    <div class="panel-body">
+      <p> A number like
+        <em>5</em>
+        or
+        <em>10</em>
+      </p>
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.label :ingredients %></h3>
+    </div>
+    <div class="panel-body">
       <table class="table">
         <thead>
           <tr>
@@ -106,22 +120,26 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <%= f.label :steps %>
-        <%= f.text_area :steps, class: "form-control" %>
-        <!-- <input class="form-control" type="text" name="recipe[steps][]"> -->
-      </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.label :steps %></h3>
+    </div>
+    <div class="panel-body">
+      <input class="form-control" type="text" name="recipe[steps][]">
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.label :notes %></h3>
+    </div>
+    <div class="panel-body">
+      <%= f.text_area :notes, class: "form-control" %>
     </div>
   </div>
 
   <div class="row">
-    <div class-"col-md-12">
-      <div class="form-group">
-        <%= f.label :notes %>
-        <%= f.text_area :notes, class: "form-control" %>
-      </div>
+    <div class="col-md-12">
       <%= f.submit "Submit", class: "btn btn-default" %>
     </div>
   </div>
