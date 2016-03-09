@@ -19,7 +19,8 @@
 @import "font-awesome";
 
 body {
-    padding-bottom: 50px;
+  padding-bottom: 50px;
+  background-color: #eaeaea;
 }
 
 .navbar-default .navbar-brand {
@@ -41,4 +42,8 @@ body {
 
 div#steps {
 	margin-bottom: 10px;
+}
+
+#ingredient-table tr td:nth-child(1) {
+  width:50%;
 }

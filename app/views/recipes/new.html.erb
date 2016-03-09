@@ -89,18 +89,18 @@
       <h3 class="panel-title"><%= f.label :ingredients %></h3>
     </div>
     <div class="panel-body">
-      <p>Enter each ingredient separately. Measurements and units are optional (see examples below).</p>
-      <table class="table">
+      <p>Enter each ingredient separately. See examples below.</p>
+      <table class="table" id="ingredient-table">
         <thead>
           <tr>
             <th scope="col">
               Ingredient name
             </th>
             <th scope="col">
-              Measurement or number
+              Measurement or number <span style="font-weight: normal"><small><em>Optional</em></small></span>
             </th>
             <th scope="col">
-              Unit
+              Unit <span style="font-weight: normal"><small><em>Optional</em></small></span>
             </th>
           </tr>
         </thead>
