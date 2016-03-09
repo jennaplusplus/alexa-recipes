@@ -11,10 +11,7 @@ Rails.application.routes.draw do
   post 'ask' => 'welcome#ask'
   get 'about' => 'welcome#about'
 
-  resources :users, only: [:index] do
-    resources :recipes
-  end
-
+  resources :recipes
 
 
   # Example of regular route:
