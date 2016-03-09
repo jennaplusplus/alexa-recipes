@@ -71,15 +71,6 @@
     </div>
   </div>
 
-  <!-- <div class="row">
-    <div class="col-md-12">
-      <div class="form-group">
-        <%= f.label :ingredients %>
-        <%= f.text_area :ingredients, class: "form-control" %>
-      </div>
-    </div>
-  </div> -->
-
   <div class="row">
     <div class="col-md-12">
       <table class="table">
@@ -120,7 +111,13 @@
       <div class="form-group">
         <%= f.label :steps %>
         <%= f.text_area :steps, class: "form-control" %>
+        <!-- <input class="form-control" type="text" name="recipe[steps][]"> -->
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class-"col-md-12">
       <div class="form-group">
         <%= f.label :notes %>
         <%= f.text_area :notes, class: "form-control" %>
@@ -128,8 +125,5 @@
       <%= f.submit "Submit", class: "btn btn-default" %>
     </div>
   </div>
-
-
-
 
 <% end %>
