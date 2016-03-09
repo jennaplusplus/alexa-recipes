@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<%= form_for [current_user, @recipe], :html => { :class => "<form></form>" } do |f| %>
+<%= form_for [current_user, @recipe], :html => { :class => "form" } do |f| %>
 
   <div class="row">
     <div class="col-md-12">
@@ -71,12 +71,47 @@
     </div>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12">
       <div class="form-group">
         <%= f.label :ingredients %>
         <%= f.text_area :ingredients, class: "form-control" %>
       </div>
+    </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">
+              Ingredient name
+            </th>
+            <th scope="col">
+              Measurement/number
+            </th>
+            <th scope="col">
+              Unit
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% 5.times do %>
+            <tr>
+              <td>
+                <input class="form-control" type="text" name="recipe[ingredients][][name]">
+              </td>
+              <td>
+                <input class="form-control" type="text" name="recipe[ingredients][][measurement]">
+              </td>
+              <td>
+                <input class="form-control" type="text" name="recipe[ingredients][][unit]">
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 
