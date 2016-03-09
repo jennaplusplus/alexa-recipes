@@ -26,6 +26,16 @@
     </div>
   </div>
 
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= f.label :description %> <small><em>Optional</em></small></h3>
+    </div>
+    <div class="panel-body">
+      <p>A short description of your delicious recipe</p>
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-4">
       <div class="panel panel-info">
@@ -71,16 +81,6 @@
           <%= f.number_field :servings, min: 1, class: "form-control" %>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= f.label :description %> <small><em>Optional</em></small></h3>
-    </div>
-    <div class="panel-body">
-      <p>A short description of your delicious recipe</p>
-      <%= f.text_field :description, class: "form-control" %>
     </div>
   </div>
 
