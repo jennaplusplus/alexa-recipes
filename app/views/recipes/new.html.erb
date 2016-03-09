@@ -18,66 +18,68 @@
 
   <div class="panel panel-info">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= f.label :name %></h3>
+      <h3 class="panel-title"><%= f.label :name %> </h3>
     </div>
     <div class="panel-body">
-      <p> The best recipe names are short and simple, like <em>Chocolate Chip Cookies</em> or <em>Pizza Dough</em>.</p>
+      <p>The best recipe names are short and simple, like <em>Chocolate Chip Cookies</em> or <em>Pizza Dough</em>.</p>
       <%= f.text_field :name, class: "form-control" %>
     </div>
   </div>
 
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= f.label :prep_time %></h3>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= f.label :prep_time %> <small><em>Optional</em></small></h3>
+        </div>
+        <div class="panel-body">
+          <p> A time like
+            <em>10 minutes </em>
+            or
+            <em>1 1/2 hours</em>
+          </p>
+          <%= f.text_field :prep_time, class: "form-control" %>
+        </div>
+      </div>
     </div>
-    <div class="panel-body">
-      <p> A time like
-        <em>10 minutes </em>
-        or
-        <em>1 1/2 hours</em>
-      </p>
-      <%= f.text_field :prep_time, class: "form-control" %>
+    <div class="col-md-4">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= f.label :cook_time %> <small><em>Optional</em></small></h3>
+        </div>
+        <div class="panel-body">
+          <p> A time like
+            <em>10 minutes </em>
+            or
+            <em>1 1/2 hours</em>
+          </p>
+          <%= f.text_field :cook_time, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= f.label :servings %> <small><em>Optional</em></small></h3>
+        </div>
+        <div class="panel-body">
+          <p> A number like
+            <em>5</em>
+            or
+            <em>10</em>
+          </p>
+          <%= f.number_field :servings, min: 1, class: "form-control" %>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="panel panel-info">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= f.label :cook_time %></h3>
+      <h3 class="panel-title"><%= f.label :description %> <small><em>Optional</em></small></h3>
     </div>
     <div class="panel-body">
-      <p> A time like
-        <em>10 minutes </em>
-        or
-        <em>1 1/2 hours</em>
-      </p>
-      <%= f.text_field :cook_time, class: "form-control" %>
-    </div>
-  </div>
-
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= f.label :servings %></h3>
-    </div>
-    <div class="panel-body">
-      <p> A number like
-        <em>5</em>
-        or
-        <em>10</em>
-      </p>
-      <%= f.number_field :servings, min: 1, class: "form-control" %>
-    </div>
-  </div>
-
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= f.label :description %></h3>
-    </div>
-    <div class="panel-body">
-      <p> A number like
-        <em>5</em>
-        or
-        <em>10</em>
-      </p>
+      <p>Describe it.</p>
       <%= f.text_field :description, class: "form-control" %>
     </div>
   </div>
@@ -131,7 +133,7 @@
 
   <div class="panel panel-info">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= f.label :notes %></h3>
+      <h3 class="panel-title"><%= f.label :notes %> <small><em>Optional</em></small></h3>
     </div>
     <div class="panel-body">
       <%= f.text_area :notes, class: "form-control" %>
