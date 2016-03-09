@@ -18,6 +18,10 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+body {
+    padding-bottom: 50px;
+}
+
 .navbar-default .navbar-brand {
   color: black;
   font-family: 'Copse', serif;
@@ -33,4 +37,8 @@
 
 .navbar {
   border-radius: 0px;
+}
+
+div#steps {
+	margin-bottom: 10px;
 }

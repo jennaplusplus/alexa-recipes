@@ -79,7 +79,7 @@
       <h3 class="panel-title"><%= f.label :description %> <small><em>Optional</em></small></h3>
     </div>
     <div class="panel-body">
-      <p>Describe it.</p>
+      <p>A short description of your delicious recipe</p>
       <%= f.text_field :description, class: "form-control" %>
     </div>
   </div>
@@ -89,6 +89,7 @@
       <h3 class="panel-title"><%= f.label :ingredients %></h3>
     </div>
     <div class="panel-body">
+      <p>Enter each ingredient separately. Measurements and units are optional (see examples below).</p>
       <table class="table">
         <thead>
           <tr>
@@ -96,7 +97,7 @@
               Ingredient name
             </th>
             <th scope="col">
-              Measurement/number
+              Measurement or number
             </th>
             <th scope="col">
               Unit
@@ -104,6 +105,33 @@
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>
+              <em>Example: flour</em>
+            </td>
+            <td>
+              <em>1 1/2</em>
+            </td>
+            <td>
+              <em>cups</em>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <em>Example: eggs</em>
+            </td>
+            <td>
+              <em>2</em>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <em>Example: salt</em>
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
           <% 5.times do %>
             <tr>
               <td>
@@ -127,7 +155,13 @@
       <h3 class="panel-title"><%= f.label :steps %></h3>
     </div>
     <div class="panel-body">
-      <input class="form-control" type="text" name="recipe[steps][]">
+      <p>Enter each step separately, in the way you want Alexa to read them. Short, manageable steps will work best!</p>
+        <% 5.times do |n| %>
+          <div class="input-group" id="steps">
+            <div class="input-group-addon"><%= n + 1 %>.</div>
+            <input class="form-control" type="text" name="recipe[steps][]">
+          </div>
+        <% end %>
     </div>
   </div>
 

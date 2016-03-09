@@ -5,3 +5,9 @@
 <% @recipe.ingredients.each do |ing| %>
   <%= ing["name"] %>
 <% end %>
+
+<p>
+  This recipe has <%= @recipe.number_of_steps %> steps.
+</p>
+
+<%= @recipe.steps %>
