@@ -12,6 +12,9 @@ class Recipe
   field :ingredients, type: Array
   field :steps, type: Array
 
+  before_validation :remove_empty_steps
+  before_validation :remove_nameless_ingredients
+
   def format_ingredient(ingredient_hash)
     if ingredient_hash["unit"].nil?
       "#{ingredient_hash["measurement"]} #{ingredient_hash["name"]}"
@@ -53,6 +56,21 @@ class Recipe
     if number.to_i > 0 && number.to_i <= self.steps.length
       self["current_step"] = number.to_i
       self.save
+    end
+  end
+
+  protected
+  def remove_empty_steps
+    (0...self.steps.length).each do |i|
+      self.steps.delete_at(i) if !self.steps[i].present?
+    end
+  end
+
+  def remove_nameless_ingredients
+    (0...self.ingredients.length).each do |i|
+      if !self.ingredients[i].present? || !self.ingredients[i]["name"].present?
+        self.ingredients.delete_at(i)
+      end
     end
   end
 

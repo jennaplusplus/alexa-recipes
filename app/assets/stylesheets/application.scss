@@ -21,19 +21,13 @@
 body {
   padding-bottom: 50px;
   background-color: #eaeaea;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .navbar-default .navbar-brand {
   color: black;
   font-family: 'Copse', serif;
   font-size: 30px;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-  color: white;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 18px;
-  line-height: 27px;
 }
 
 .navbar {
