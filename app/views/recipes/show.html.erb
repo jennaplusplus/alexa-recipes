@@ -9,6 +9,8 @@
     <h1 class="panel-title recipe-card"><%= @recipe.name %></h1>
   </div>
   <div class="panel-body">
+    <%= link_to "Edit this recipe", edit_recipe_path(@recipe), class: "btn btn-default" %>
+
     <% if @recipe.description %>
       <h3>Description</h3>
       <p><%= @recipe.description %></p>
@@ -17,7 +19,7 @@
     <div class="row">
       <% attributes = {"Prep time" => @recipe.prep_time, "Cook time" => @recipe.cook_time, "Servings" => @recipe.servings} %>
       <% attributes.each do |name, value| %>
-        <% if attributes[name] %>
+        <% if attributes[name].present? %>
           <div class="col-sm-4">
             <h3><%= name %></h3>
             <p><%= value %></p>
