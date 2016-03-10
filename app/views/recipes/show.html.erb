@@ -1,13 +1,27 @@
-<h1>Show Recipe</h1>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h1 class="panel-title recipe-card"><%= @recipe.name %></h1>
+  </div>
+  <div class="panel-body">
+    <% if @recipe.description %>
+      <h3>Description</h3>
+      <p><%= @recipe.description %></p>
+    <% end %>
 
-<h2><%= @recipe.name %></h2>
+    <div class="row">
+      <% attributes = {"Prep time" => @recipe.prep_time, "Cook time" => @recipe.cook_time, "Servings" => @recipe.servings} %>
+      <% attributes.each do |name, value| %>
+        <% if attributes[name] %>
+          <div class="col-md-4">
+            <h3><%= name %></h3>
+            <p><%= value %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
 
-<% @recipe.ingredients.each do |ing| %>
-  <%= ing["name"] %>
-<% end %>
+    
 
-<p>
-  This recipe has <%= @recipe.number_of_steps %> steps.
-</p>
 
-<%= @recipe.steps %>
+  </div>
+</div>
