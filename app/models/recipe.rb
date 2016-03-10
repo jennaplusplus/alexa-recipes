@@ -82,6 +82,8 @@ class Recipe
         if !ingredient["name"].present? && !ingredient["measurement"].present? && !ingredient["unit"].present?
           self.ingredients.delete(ingredient)
         end
+        ingredient["measurement"] = nil if ingredient["measurement"] == ""
+        ingredient["unit"] = nil if ingredient["unit"] == ""
       end
     end
   end

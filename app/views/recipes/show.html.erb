@@ -1,3 +1,9 @@
+<p>
+  <%= link_to recipes_path do %>
+    <i class="fa fa-long-arrow-left"></i> Back to My Recipes
+  <% end %>
+</p>
+
 <div class="panel panel-info">
   <div class="panel-heading">
     <h1 class="panel-title recipe-card"><%= @recipe.name %></h1>
@@ -12,7 +18,7 @@
       <% attributes = {"Prep time" => @recipe.prep_time, "Cook time" => @recipe.cook_time, "Servings" => @recipe.servings} %>
       <% attributes.each do |name, value| %>
         <% if attributes[name] %>
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <h3><%= name %></h3>
             <p><%= value %></p>
           </div>
@@ -20,7 +26,35 @@
       <% end %>
     </div>
 
-    
+    <h3>Ingredients</h3>
+    <% @recipe.ingredients.each do |ingredient| %>
+      <% if ingredient["unit"] %>
+        <p>
+          <%= "#{ingredient["measurement"]} #{ingredient["unit"]} #{ingredient["name"]}" %>
+        </p>
+      <% elsif ingredient["measurement"] %>
+        <p>
+          <%= "#{ingredient["measurement"]} #{ingredient["name"]}" %>
+        </p>
+      <% else %>
+        <p>
+          <%= ingredient["name"] %>
+        </p>
+      <% end %>
+    <% end %>
+
+    <h3>Steps</h3>
+    <% @recipe.steps.each_with_index do |step, i| %>
+      <p>
+        <%= i + 1 %>. <%= step %>
+      </p>
+    <% end %>
+
+    <% if @recipe.notes %>
+      <h3>Notes</h3>
+      <p><%= @recipe.notes %></p>
+    <% end %>
+
 
 
   </div>
