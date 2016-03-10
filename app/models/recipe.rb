@@ -13,7 +13,15 @@ class Recipe
   field :steps, type: Array
 
   before_validation :remove_empty_steps
-  before_validation :remove_nameless_ingredients
+  before_validation :remove_empty_ingredients
+  before_validation :strip_steps_and_ingredients
+  before_validation :titleize_name
+
+  validates :name, presence: true
+  validates :name, uniqueness: { scope: :user }
+  validates :steps, presence: true
+  validates :ingredients, presence: true
+  validates_with IngredientValidator
 
   def format_ingredient(ingredient_hash)
     if ingredient_hash["unit"].nil?
@@ -61,15 +69,39 @@ class Recipe
 
   protected
   def remove_empty_steps
-    (0...self.steps.length).each do |i|
-      self.steps.delete_at(i) if !self.steps[i].present?
+    if !self.steps.nil?
+      self.steps.each do |step|
+        self.steps.delete(step) if !step.present?
+      end
     end
   end
 
-  def remove_nameless_ingredients
-    (0...self.ingredients.length).each do |i|
-      if !self.ingredients[i].present? || !self.ingredients[i]["name"].present?
-        self.ingredients.delete_at(i)
+  def remove_empty_ingredients
+    if !self.ingredients.nil?
+      self.ingredients.each do |ingredient|
+        if !ingredient["name"].present? && !ingredient["measurement"].present? && !ingredient["unit"].present?
+          self.ingredients.delete(ingredient)
+        end
+      end
+    end
+  end
+
+  def titleize_name
+    self.name = self.name.titleize if self.name.present?
+  end
+
+  def strip_steps_and_ingredients
+    if !self.steps.nil?
+      self.steps.each do |step|
+        step.strip!
+      end
+    end
+
+    if !self.ingredients.nil?
+      self.ingredients.each do |ingredient|
+        ingredient["name"].strip! if ingredient["name"]
+        ingredient["measurement"].strip! if ingredient["measurement"]
+        ingredient["unit"].strip! if ingredient["unit"]
       end
     end
   end
