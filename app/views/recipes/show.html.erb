@@ -57,7 +57,8 @@
       <p><%= @recipe.notes %></p>
     <% end %>
 
-
-
+    <%= link_to recipe_path(@recipe), method: :delete, class: "btn btn-warning delete-recipe" do %>
+      <i class="fa fa-trash-o"></i> Delete recipe
+    <% end %>
   </div>
 </div>
