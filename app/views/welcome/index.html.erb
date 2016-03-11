@@ -1,15 +1,33 @@
-<div class="jumbotron">
-  <div class="row">
-    <div class="col-md-6 col-sm-12 welcome-speech">
-      <h1>Create, speak, bon appétit!</h1>
-      <p>Alexa Recipes works alongside your Amazon Echo device to interact with your favorite recipes via voice.</p>
-      <p class="jumbotron-buttons">
-        <%= link_to 'Get started', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
-        <%= link_to 'Learn more', about_path, class: 'btn btn-success btn-lg' %>
-      </p>
-    </div>
-    <div class="col-md-6 col-sm-12 welcome-logo">
-      <%= image_tag("alexa-recipes-large-3.png", alt: "Alexa Recipes Logo", class: "logo") %>
+<% if user_signed_in? %>
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 welcome-speech">
+        <h1>Welcome back!</h1>
+        <p>Alexa Recipes works alongside your Amazon Echo device to interact with your favorite recipes via voice.</p>
+        <p class="jumbotron-buttons">
+          <%= link_to 'View your recipes', recipes_path, class: 'btn btn-primary btn-lg' %>
+          <%= link_to 'Get help', about_path, class: 'btn btn-success btn-lg' %>
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-12 welcome-logo">
+        <%= image_tag("alexa-recipes-large-3.png", alt: "Alexa Recipes Logo", class: "logo") %>
+      </div>
     </div>
   </div>
-</div>
+<% else %>
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 welcome-speech">
+        <h1>Create, speak, bon appétit!</h1>
+        <p>Alexa Recipes works alongside your Amazon Echo device to interact with your favorite recipes via voice.</p>
+        <p class="jumbotron-buttons">
+          <%= link_to 'Get started', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+          <%= link_to 'Learn more', about_path, class: 'btn btn-success btn-lg' %>
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-12 welcome-logo">
+        <%= image_tag("alexa-recipes-large-3.png", alt: "Alexa Recipes Logo", class: "logo") %>
+      </div>
+    </div>
+  </div>
+<% end %>
