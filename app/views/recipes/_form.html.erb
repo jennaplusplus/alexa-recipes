@@ -130,18 +130,34 @@
             <td></td>
             <td></td>
           </tr>
-          <% 5.times do %>
-            <tr>
-              <td>
-                <input class="form-control" type="text" name="recipe[ingredients][][name]">
-              </td>
-              <td>
-                <input class="form-control" type="text" name="recipe[ingredients][][measurement]">
-              </td>
-              <td>
-                <input class="form-control" type="text" name="recipe[ingredients][][unit]">
-              </td>
-            </tr>
+          <% if !@recipe.ingredients %>
+            <% 5.times do %>
+              <tr>
+                <td>
+                  <input class="form-control" type="text" name="recipe[ingredients][][name]">
+                </td>
+                <td>
+                  <input class="form-control" type="text" name="recipe[ingredients][][measurement]">
+                </td>
+                <td>
+                  <input class="form-control" type="text" name="recipe[ingredients][][unit]">
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <% @recipe.ingredients.each do |ingredient| %>
+              <tr>
+                <td>
+                  <input class="form-control" type="text" name="recipe[ingredients][][name]" value="<%=ingredient["name"]%>">
+                </td>
+                <td>
+                  <input class="form-control" type="text" name="recipe[ingredients][][measurement]" value="<%=ingredient["measurement"]%>">
+                </td>
+                <td>
+                  <input class="form-control" type="text" name="recipe[ingredients][][unit]" value="<%=ingredient["unit"]%>">
+                </td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>
@@ -155,7 +171,7 @@
     </div>
     <div class="panel-body">
       <p>Enter each step separately, in the way you want Alexa to read them. Short, manageable steps will work best!</p>
-        <% if @recipe.new_record? %>
+        <% if !@recipe.steps? %>
           <% 5.times do |n| %>
             <div class="input-group step">
               <div class="input-group-addon"><%= n + 1 %>.</div>
@@ -166,7 +182,7 @@
           <% @recipe.steps.each_with_index do |step, n| %>
             <div class="input-group step">
               <div class="input-group-addon"><%= n + 1 %>.</div>
-              <%= f.text_field :steps, :name => "recipe[steps][]", :value => step, :class => "form-control" %>
+              <input class="form-control" type="text" name="recipe[steps][]" value="<%=step%>" >
             </div>
           <% end %>
         <% end %>
