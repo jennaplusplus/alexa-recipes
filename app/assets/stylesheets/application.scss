@@ -42,12 +42,29 @@ body {
 .jumbotron {
   background-color: white;
   border: 1px solid #7DAEC6;
+  overflow: auto;
+}
+
+.welcome-speech {
+  width: 50%;
+  float: left;
+}
+
+.welcome-logo {
+  text-align: center;
+  width: 50%;
+  height: auto;
+  overflow: hidden;
+}
+
+.welcome-speech h1 {
+  font-size: 30px;
+  color: #01ACCC;
 }
 
 .logo {
-  width: 30%;
+  width: 75%;
   height: auto;
-  display: inline;
 }
 
 div.step {

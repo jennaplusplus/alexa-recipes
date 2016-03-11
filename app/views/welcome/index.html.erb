@@ -1,7 +1,13 @@
 <div class="jumbotron">
-  <%= image_tag("alexa-recipes-large-3.png", alt: "Alexa Recipes Logo", class: "logo") %>
-  <p>Register to get started.</p>
-  <p>
-    <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
-  </p>
+  <div class="welcome-speech">
+    <h1>Create, speak, bon appétit!</h1>
+    <p>Alexa Recipes works alongside your Amazon Echo device to interact with your favorite recipes via voice.</p>
+    <p>Register to get started.</p>
+    <p>
+      <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+    </p>
+  </div>
+  <div class="welcome-logo" %>
+    <%= image_tag("alexa-recipes-large-3.png", alt: "Alexa Recipes Logo", class: "logo") %>
+  </div>
 </div>
