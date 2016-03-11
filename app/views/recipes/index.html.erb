@@ -1,9 +1,20 @@
-<h1>Recipes Index</h1>
-<h2>My Recipes</h2>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h1 class="panel-title recipe-card">My Recipes</h1>
+  </div>
+  <div class="panel-body">
+    <p>
+      <%= link_to "Add a new recipe", new_recipe_path, class: "btn btn-success" %>
+    </p>
 
-<% @recipes.each do |recipe| %>
-  <h3><%= link_to recipe.name, recipe_path(recipe) %></h3>
-<% end %>
-
-
-<%= link_to "Create a new recipe", new_recipe_path, class: "btn btn-primary" %>
+  <% if current_user.recipes.empty? %>
+    <p>
+      You don't have any recipes! Why don't you <%= link_to "add one?", new_recipe_path %>
+    </p>
+  <% else %>
+    <% current_user.recipes.each do |recipe| %>
+      <h2><%= link_to recipe.name, recipe_path(recipe), class: "recipe-in-list" %></h2>
+    <% end %>
+  <% end %>
+  </div>
+</div>
