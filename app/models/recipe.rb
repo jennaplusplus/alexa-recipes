@@ -22,6 +22,7 @@ class Recipe
   validates :name, uniqueness: { scope: :user }
   validates :steps, presence: true
   validates :ingredients, presence: true
+  validates :servings, numericality: { greater_than: 0 }, allow_nil: true
   validates_with IngredientValidator
 
   def format_ingredient(ingredient_hash)
@@ -111,9 +112,20 @@ class Recipe
   end
 
   def replace_empty_strings_with_nil
-    fields = [self.name, self.description, self.prep_time, self.cook_time, self.servings, self.notes]
-    fields.each { |field| field.strip! if field.present? }
-    fields.map! { |field| field == "" ? nil : field }
+    self["name"].strip! if !self["name"].nil?
+    self["name"] = nil if self["name"] == ""
+
+    self["description"].strip! if !self["description"].nil?
+    self["description"] = nil if self["description"] == ""
+
+    self["prep_time"].strip! if !self["prep_time"].nil?
+    self["prep_time"] = nil if self["prep_time"] == ""
+
+    self["cook_time"].strip! if !self["cook_time"].nil?
+    self["cook_time"] = nil if self["cook_time"] == ""
+
+    self["notes"].strip! if !self["notes"].nil?
+    self["notes"] = nil if self["notes"] == ""
   end
 
 end
