@@ -15,7 +15,8 @@ class Recipe
   before_validation :remove_empty_steps
   before_validation :remove_empty_ingredients
   before_validation :strip_steps_and_ingredients
-  before_validation :titleize_name
+  before_validation :titleize_and_strip_name
+  before_validation :replace_empty_strings_with_nil
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user }
@@ -88,8 +89,9 @@ class Recipe
     end
   end
 
-  def titleize_name
+  def titleize_and_strip_name
     self.name = self.name.titleize if self.name.present?
+    self.name.strip! if self.name.present?
   end
 
   def strip_steps_and_ingredients
@@ -106,6 +108,12 @@ class Recipe
         ingredient["unit"].strip! if ingredient["unit"]
       end
     end
+  end
+
+  def replace_empty_strings_with_nil
+    fields = [self.name, self.description, self.prep_time, self.cook_time, self.servings, self.notes]
+    fields.each { |field| field.strip! if field.present? }
+    fields.map! { |field| field == "" ? nil : field }
   end
 
 end
