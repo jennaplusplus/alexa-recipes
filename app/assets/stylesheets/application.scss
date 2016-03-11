@@ -20,7 +20,7 @@
 
 body {
   padding-bottom: 50px;
-  background-color: #eaeaea;
+  background-color: #D9EDF7;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -30,8 +30,18 @@ body {
   font-size: 30px;
 }
 
+.navbar-default .navbar-nav > li > a {
+  color: black;
+}
+
 .navbar {
+  background-color: white;
   border-radius: 0px;
+}
+
+.jumbotron {
+  background-color: #FFFEF6;
+  border: 1px solid #7DAEC6;
 }
 
 div.step {
