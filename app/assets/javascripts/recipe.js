@@ -21,5 +21,15 @@ $( document ).ready(function() {
     }
   });
 
+  $("#delete-button").click(function () {
+    $(this).hide();
+    $("#am-sure-or-cancel-zone").show();
+  });
+
+  $("#cancel-delete").click(function() {
+    $("#am-sure-or-cancel-zone").hide();
+    $("#delete-button").show();
+  });
+
 
 });

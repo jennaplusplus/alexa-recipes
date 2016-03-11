@@ -57,8 +57,14 @@
       <p><%= @recipe.notes %></p>
     <% end %>
 
-    <%= link_to recipe_path(@recipe), method: :delete, class: "btn btn-warning delete-recipe" do %>
-      <i class="fa fa-trash-o"></i> Delete recipe
-    <% end %>
+    <button type="button" class="btn btn-warning delete-recipe" id="delete-button"><i class="fa fa-trash-o"></i> Delete recipe?</button>
+
+    <span style="display: none;" id="am-sure-or-cancel-zone">
+      <%= link_to recipe_path(@recipe), method: :delete, class: "btn btn-danger delete-recipe" do %>
+        <i class="fa fa-trash-o"></i> I'm sure
+      <% end %>
+      <button type="button" class="btn btn-default delete-recipe" id="cancel-delete">Cancel</button>
+    </span>
+
   </div>
 </div>
