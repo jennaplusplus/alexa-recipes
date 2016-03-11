@@ -40,8 +40,14 @@ body {
 }
 
 .jumbotron {
-  background-color: #FFFEF6;
+  background-color: white;
   border: 1px solid #7DAEC6;
+}
+
+.logo {
+  width: 30%;
+  height: auto;
+  display: inline;
 }
 
 div.step {
@@ -58,6 +64,10 @@ button#more-steps {
 
 h1.recipe-card {
   font-size: 30px;
+}
+
+h1.about-card {
+  font-size: 20px;
 }
 
 .delete-recipe {
