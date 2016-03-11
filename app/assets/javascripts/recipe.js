@@ -14,6 +14,7 @@ $( document ).ready(function() {
     for (var i = 0; i < 3; i++) {
       var $step = $("div.step:last");
       var $newStep = $step.clone();
+      $newStep.find(':input').val('');
       var newNumber = Number($newStep.find('.input-group-addon').text()) + 1;
       $newStep.find('.input-group-addon').text(newNumber + '.');
       $step.after($newStep);
