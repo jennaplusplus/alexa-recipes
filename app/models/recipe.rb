@@ -13,8 +13,8 @@ class Recipe
   field :steps, type: Array
 
   before_validation :remove_empty_steps
-  before_validation :remove_empty_ingredients
   before_validation :strip_steps_and_ingredients
+  before_validation :remove_empty_ingredients
   before_validation :titleize_and_strip_name
   before_validation :replace_empty_strings_with_nil
 
