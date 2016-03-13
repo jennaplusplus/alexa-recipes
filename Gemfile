@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# encoding
+gem 'htmlentities'
+
 # matching
 gem 'amatch'
 

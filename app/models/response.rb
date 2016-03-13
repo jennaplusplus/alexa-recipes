@@ -5,7 +5,7 @@ class Response
     @response = {
       "outputSpeech" => {
         "type" => "PlainText",
-        "text" => info_hash[:text]
+        "text" => HTMLEntities.new.encode(info_hash[:text])
       },
       "card" => nil,
       "reprompt" => nil,
