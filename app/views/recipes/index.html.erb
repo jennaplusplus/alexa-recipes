@@ -12,7 +12,7 @@
       You don't have any recipes! Why don't you <%= link_to "add one?", new_recipe_path %>
     </p>
   <% else %>
-    <% current_user.recipes.each do |recipe| %>
+    <% @recipes.each do |recipe| %>
       <h2><%= link_to recipe.name, recipe_path(recipe), class: "recipe-in-list" %></h2>
     <% end %>
   <% end %>
