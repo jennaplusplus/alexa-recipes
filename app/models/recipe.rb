@@ -114,20 +114,10 @@ class Recipe
   end
 
   def replace_empty_strings_with_nil
-    self["name"].strip! if !self["name"].nil?
-    self["name"] = nil if self["name"] == ""
-
-    self["description"].strip! if !self["description"].nil?
-    self["description"] = nil if self["description"] == ""
-
-    self["prep_time"].strip! if !self["prep_time"].nil?
-    self["prep_time"] = nil if self["prep_time"] == ""
-
-    self["cook_time"].strip! if !self["cook_time"].nil?
-    self["cook_time"] = nil if self["cook_time"] == ""
-
-    self["notes"].strip! if !self["notes"].nil?
-    self["notes"] = nil if self["notes"] == ""
+    ["name", "description", "prep_time", "cook_time", "notes"].each do |field|
+      self[field].strip! if self[field].present?
+      self[field] = nil unless self[field].present?
+    end
   end
 
 end
