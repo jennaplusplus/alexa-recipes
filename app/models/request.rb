@@ -255,7 +255,7 @@ class Request
       end
 
       matches = recipe["ingredients"].select do |ingredient|
-        query_set.any? { |word| ingredient["name"].include?(word)}
+        query_set.any? { |word| ingredient["name"].downcase.include?(word)}
       end
     end
 
