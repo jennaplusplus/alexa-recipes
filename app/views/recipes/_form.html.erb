@@ -158,6 +158,21 @@
                 </td>
               </tr>
             <% end %>
+            <% if @recipe.ingredients.length < 5 %>
+              <% (5 - @recipe.ingredients.length).times do %>
+                <tr>
+                  <td>
+                    <input class="form-control" type="text" name="recipe[ingredients][][name]">
+                  </td>
+                  <td>
+                    <input class="form-control" type="text" name="recipe[ingredients][][measurement]">
+                  </td>
+                  <td>
+                    <input class="form-control" type="text" name="recipe[ingredients][][unit]">
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
           <% end %>
         </tbody>
       </table>
