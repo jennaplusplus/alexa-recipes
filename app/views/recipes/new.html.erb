@@ -1,3 +1,9 @@
+<p>
+  <%= link_to recipes_path do %>
+    <i class="fa fa-long-arrow-left"></i> Back to My Recipes (without saving)
+  <% end %>
+</p>
+
 <h1>New Recipe</h1>
 
 <%= render partial: 'form', locals: { :button_text => "Save Recipe", :method => :post } %>
