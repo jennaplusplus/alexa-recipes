@@ -26,10 +26,12 @@ class Recipe
   validates_with IngredientValidator
 
   def format_ingredient(ingredient_hash)
-    if ingredient_hash["unit"].nil?
+    if ingredient_hash["measurement"] && ingredient_hash["unit"]
+      "#{ingredient_hash["measurement"]} #{ingredient_hash["unit"]} of #{ingredient_hash["name"]}"
+    elsif ingredient_hash["measurement"]
       "#{ingredient_hash["measurement"]} #{ingredient_hash["name"]}"
     else
-      "#{ingredient_hash["measurement"]} #{ingredient_hash["unit"]} of #{ingredient_hash["name"]}"
+      "#{ingredient_hash["name"]}"
     end
   end
 
