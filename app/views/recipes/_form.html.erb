@@ -185,6 +185,14 @@
               <input class="form-control" type="text" name="recipe[steps][]" value="<%=step%>" >
             </div>
           <% end %>
+          <% if @recipe.steps.length < 5 %>
+            <% (5 - @recipe.steps.length).times do |n| %>
+              <div class="input-group step">
+                <div class="input-group-addon"><%= @recipe.steps.length + n + 1 %>.</div>
+                <input class="form-control" type="text" name="recipe[steps][]">
+              </div>
+            <% end %>
+          <% end %>
         <% end %>
         <button type="button" class="btn btn-info" id="more-steps">Add more steps</button>
     </div>
