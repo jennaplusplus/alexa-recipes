@@ -157,6 +157,7 @@ RSpec.describe Request, type: :model do
     context "the user has no recipes" do
       it "returns a response" do
         req = Request.new(intent_params)
+        req.user.recipes.destroy
         expect(req.user.recipes.count).to eq 0
         expect(req.recipe_list).to be_an_instance_of Response
       end
@@ -164,7 +165,6 @@ RSpec.describe Request, type: :model do
     context "the user has one recipe" do
       it "returns a response" do
         req = Request.new(intent_params)
-        Recipe.create(user_id: req.user.id)
         expect(req.user.recipes.count).to eq 1
         expect(req.recipe_list).to be_an_instance_of Response
       end
@@ -172,9 +172,9 @@ RSpec.describe Request, type: :model do
     context "the user has multiple recipes" do
       it "returns a response" do
         req = Request.new(intent_params)
-        create(:recipe, user_id: req.user.id)
-        create(:recipe, user_id: req.user.id)
-        expect(req.user.recipes.count).to eq 2
+        create(:recipe, name: "Something", user_id: req.user.id)
+        create(:recipe, name: "Something else", user_id: req.user.id)
+        expect(req.user.recipes.count).to eq 3
         expect(req.recipe_list).to be_an_instance_of Response
       end
     end
@@ -227,9 +227,9 @@ RSpec.describe Request, type: :model do
     end
     context "one good recipe match" do
       it "returns a response" do
-        new_recipe = Recipe.new(name: "baked potato")
-        recipe.user.recipes << new_recipe
         req = Request.new(intent_params)
+        new_recipe = create(:recipe, name: "baked potato", user_id: req.user.id)
+        recipe.user.recipes << new_recipe
         expect(req.go_to_recipe).to be_an_instance_of Response
       end
     end
@@ -240,23 +240,23 @@ RSpec.describe Request, type: :model do
         expect(req.go_to_recipe).to be_an_instance_of Response
       end
     end
-    context "one potential match" do
+    context "one maybe plausible match" do
       it "returns a response" do
-        new_recipe = Recipe.new(name: "banana bread")
-        recipe.user.recipes << new_recipe
         intent_params["request"]["intent"]["slots"]["Recipe"]["value"] = "bread"
         req = Request.new(intent_params)
+        new_recipe = create(:recipe, name: "banana bread", user_id: req.user.id)
+        recipe.user.recipes << new_recipe
         expect(req.go_to_recipe).to be_an_instance_of Response
       end
     end
     context "several potential matches" do
       it "returns a response" do
-        new_recipe = Recipe.new(name: "banana bread")
-        recipe.user.recipes << new_recipe
-        new_recipe = Recipe.new(name: "other bread")
-        recipe.user.recipes << new_recipe
         intent_params["request"]["intent"]["slots"]["Recipe"]["value"] = "bread"
         req = Request.new(intent_params)
+        new_recipe = create(:recipe, name: "banana bread", user_id: req.user.id)
+        recipe.user.recipes << new_recipe
+        new_recipe = create(:recipe, name: "other bread", user_id: req.user.id)
+        recipe.user.recipes << new_recipe
         expect(req.go_to_recipe).to be_an_instance_of Response
       end
     end
