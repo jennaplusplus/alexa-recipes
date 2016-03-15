@@ -51,8 +51,66 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
+  after_create :add_starter_recipe
+
+
   def active_recipe
     return nil if self["active_recipe_id"].nil?
     self.recipes.find(self["active_recipe_id"])
+  end
+
+  protected
+
+  def add_starter_recipe
+    recipe = self.recipes.new(
+      name: "Ice Cream Sundae",
+      description: "This sundae is classic, colorful, and super easy to make. Try out this recipe with Alexa Recipes on your Echo device!",
+      prep_time: "3 minutes",
+      servings: 1,
+      ingredients: [
+        {
+          "name"=>"vanilla ice-cream",
+          "measurement"=>"2",
+          "unit"=>"scoops"
+        },
+        {
+          "name"=>"banana",
+          "measurement"=>"1",
+          "unit"=>nil
+        },
+        {
+          "name"=>"chopped nuts",
+          "measurement"=>"2",
+          "unit"=>"tablespoons"
+        },
+        {
+          "name"=>"strawberry syrup",
+          "measurement"=>"1",
+          "unit"=>"good squeeze"
+        },
+        {
+          "name"=>"maraschino cherries",
+          "measurement"=>"3",
+          "unit"=>nil
+        },
+        {
+          "name"=>"whipped cream",
+          "measurement"=>"1",
+          "unit"=>"dollop"
+        },
+        {
+          "name"=>"sprinkles",
+          "measurement"=>nil,
+          "unit"=>nil
+        }
+      ],
+      steps: [
+        "Split the banana in half lengthwise and place in dish.",
+        "Add scoops of ice-cream between the banana slices.",
+        "Top with nuts, syrup, and whipped cream.",
+        "Add cherries and finish with a generous helping of sprinkles."
+      ],
+    )
+    recipe.save
   end
 end
