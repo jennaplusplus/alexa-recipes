@@ -1,0 +1,167 @@
+IngredientList I'd like a list of ingredients for this recipe
+IngredientList give me the ingredients
+IngredientList what are the ingredients
+IngredientList ingredients
+IngredientList for my ingredients
+
+GetIngredient How much {Ingredient} do I need
+GetIngredient How much {Ingredient}
+GetIngredient How much {Ingredient} goes in this
+GetIngredient How many {Ingredient} do I need
+GetIngredient How many {Ingredient}
+GetIngredient How many {Ingredient} goes in this
+GetIngredient Do I need {Ingredient}
+GetIngredient Do I need {Ingredient} for this
+GetIngredient Do I need {Ingredient} for this recipe
+GetIngredient Does this recipe require {Ingredient}
+GetIngredient Do I need a lot of {Ingredient}
+GetIngredient Do I need any {Ingredient}
+GetIngredient Do I need an {Ingredient}
+
+GetCurrentStep What step am I on
+GetCurrentStep What step I'm on
+GetCurrentStep for my current step
+GetCurrentStep what I'm supposed to be going
+GetCurrentStep what step
+GetCurrentStep current step
+GetCurrentStep step
+GetCurrentStep what do I do
+GetCurrentStep what do I do now
+
+GetNextStep next step
+GetNextStep what's the next step
+GetNextStep what's next
+GetNextStep next
+GetNextStep for the next step
+GetNextStep go to the next step
+GetNextStep go forward a step
+GetNextStep go forward
+GetNextStep I'm done with this step
+
+GetPreviousStep back a step
+GetPreviousStep go back a step
+GetPreviousStep what's the previous step
+GetPreviousStep go back
+GetPreviousStep back
+GetPreviousStep what was the last step
+GetPreviousStep what was the previous step
+
+ResetStep start over
+ResetStep reset steps
+ResetStep reset step
+ResetStep start from the beginning
+ResetStep let's start over
+
+GoToStep what step {Number} is
+GoToStep what is step {Number}
+GoToStep go to step {Number}
+GoToStep go to the {Number} step
+GoToStep go to step number {Number}
+GoToStep step number {Number}
+GoToStep step {Number}
+
+GoToOrdinalStep what the {OrdinalNumber} step is
+GoToOrdinalStep what is the {OrdinalNumber} step
+GoToOrdinalStep go to the {OrdinalNumber} step
+GoToOrdinalStep {OrdinalNumber} step
+
+HowManySteps how many steps are there
+HowManySteps number of steps
+HowManySteps how many steps there are
+
+HowManyStepsLeft how many steps are left
+HowManyStepsLeft how many steps there are left
+HowManyStepsLeft how many more steps there are
+HowManyStepsLeft how many more steps
+HowManyStepsLeft how many steps remaining
+HowManyStepsLeft how many steps left
+
+GetRecipeName what recipe is this
+GetRecipeName what recipe this is
+GetRecipeName what's the name of this recipe
+GetRecipeName what the name of this recipe is
+GetRecipeName what this recipe is called
+GetRecipeName what this is called
+GetRecipeName what this recipe is for
+
+GoToRecipe go to my recipe for {Recipe}
+GoToRecipe go to my {Recipe} recipe
+GoToRecipe for my recipe for {Recipe}
+GoToRecipe for my {Recipe} recipe
+GoToRecipe open my {Recipe} recipe
+GoToRecipe open my recipe for {Recipe}
+
+RecipeList for a list of my recipes
+RecipeList what recipes I have
+RecipeList my recipes
+RecipeList my available recipes
+RecipeList what recipes do I have
+RecipeList for my recipes
+
+SayRecipeName {Recipe}
+SayRecipeName my recipe for {Recipe}
+SayRecipeName my {Recipe} recipe
+SayRecipeName the {Recipe} recipe
+
+AMAZON.YesIntent yes please
+AMAZON.YesIntent sure
+
+AMAZON.NoIntent no thanks
+AMAZON.NoIntent not right now
+
+GoToFinalStep go to the last step
+GoToFinalStep to the final step
+GoToFinalStep what's the last step
+GoToFinalStep what's the final step
+GoToFinalStep what the last step is
+GoToFinalStep what the final step
+
+GetServings how many servings does this make
+GetServings how many servings this makes
+GetServings how many portions does this make
+GetServings how many portions this makes
+GetServings how many people does this feed
+GetServings how many people this feeds
+GetServings how many servings
+GetServings servings
+
+GetPrepTime how much time does this take
+GetPrepTime how much time this takes
+GetPrepTime how long does this take
+GetPrepTime how long this takes
+GetPrepTime how much time does it take for this
+GetPrepTime how much time it takes for this
+GetPrepTime what's the preparation time
+GetPrepTime what the preparaton time is
+GetPrepTime what's the cook time
+GetPrepTime what the cook time is
+GetPrepTime how long this needs to cook for
+GetPrepTime how long this takes to prepare
+GetPrepTime how much time
+
+GetDescription what the description of this recipe is
+GetDescription what's the description of this recipe
+
+GetNotes do I have any notes about this recipe
+GetNotes what notes do I have for this recipe
+GetNotes recipe notes
+GetNotes notes
+GetNotes tell me my notes
+GetNotes what are my notes about this recipe
+GetNotes what my notes are for this recipe
+GetNotes what my notes are
+
+GetSteps what are the steps of this recipe
+GetSteps what the steps are
+GetSteps list of steps
+GetSteps tell me the steps
+GetSteps list the steps
+GetSteps for the steps
+GetSteps what are all the steps
+GetSteps what are all the steps
+
+PreviewRecipe preview this recipe
+PreviewRecipe preview
+PreviewRecipe tell me about this recipe
+PreviewRecipe give me an overview of this recipe
+PreviewRecipe brief me on this recipe

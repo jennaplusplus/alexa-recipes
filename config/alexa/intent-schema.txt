@@ -1,0 +1,112 @@
+{
+  "intents": [
+    {
+      "intent": "IngredientList"
+    },
+	{
+      "intent": "IngredientAmount",
+      "slots": [
+        {
+          "name": "Ingredient",
+          "type": "LIST_OF_INGREDIENTS"
+        }
+      ]
+    },
+    {
+      "intent": "GoToRecipe",
+      "slots": [
+        {
+          "name": "Recipe",
+          "type": "LIST_OF_RECIPES"
+        }
+      ]
+    },
+    {
+      "intent": "SayRecipeName",
+      "slots": [
+        {
+          "name": "Recipe",
+          "type": "LIST_OF_RECIPES"
+        }
+      ]
+    },
+    {
+      "intent": "GetIngredient",
+      "slots": [
+        {
+          "name": "Ingredient",
+          "type": "LIST_OF_INGREDIENTS"
+        }
+      ]
+    },
+    {
+      "intent": "GetCurrentStep"
+    },
+    {
+      "intent": "GetNextStep"
+    },
+    {
+      "intent": "GetPreviousStep"
+    },
+    {
+      "intent": "GoToFinalStep"
+    },
+    {
+      "intent": "ResetStep"
+    },
+    {
+      "intent": "GoToStep",
+      "slots": [
+        {
+          "name": "Number",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "GoToOrdinalStep",
+      "slots": [
+        {
+          "name": "OrdinalNumber",
+          "type": "LIST_OF_ORDINAL_NUMBERS"
+        }
+      ]
+    },
+    {
+      "intent": "HowManySteps"
+    },
+        {
+      "intent": "RecipeList"
+    },
+    {
+      "intent": "HowManyStepsLeft"
+    },
+    {
+      "intent": "GetRecipeName"
+    },
+    {
+      "intent": "GetServings"
+    },
+    {
+      "intent": "GetPrepTime"
+    },
+    {
+      "intent": "GetDescription"
+    },
+    {
+      "intent": "GetNotes"
+    },
+    {
+      "intent": "GetSteps"
+    },
+    {
+      "intent": "PreviewRecipe"
+    },
+    {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
+    }
+  ]
+}
