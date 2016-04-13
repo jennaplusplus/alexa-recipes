@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+# OAuth
+gem 'doorkeeper'
+gem "doorkeeper-mongodb", github: "doorkeeper-gem/doorkeeper-mongodb"
+gem 'oauth2'
+
 # encoding
 gem 'htmlentities'
 
